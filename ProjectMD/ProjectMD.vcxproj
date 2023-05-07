@@ -135,6 +135,7 @@
     <ClInclude Include="MDPlayerController.h" />
     <ClInclude Include="MDPlayerState.h" />
     <ClInclude Include="MDRenderComponent.h" />
+    <ClInclude Include="MDScene.h" />
     <ClInclude Include="MDSceneComponent.h" />
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +147,7 @@
     <ClCompile Include="MDPlayerController.cpp" />
     <ClCompile Include="MDPlayerState.cpp" />
     <ClCompile Include="MDRenderComponent.cpp" />
+    <ClCompile Include="MDScene.cpp" />
     <ClCompile Include="MDSceneComponent.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

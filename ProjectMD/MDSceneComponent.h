@@ -1,13 +1,10 @@
 #pragma once
 
-#include <utility>
+#include "MDDefines.h"
 using namespace std;
 
 class MDSceneComponent
 {
-public:
-    typedef pair<int, int> Vector2D;
-
 public:
     inline int GetX() const { return Position.first; }
     inline int GetY() const { return Position.second; }
