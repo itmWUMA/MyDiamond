@@ -14,4 +14,35 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MDGameMode.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MDPlayerController.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MDPawn.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MDPlayerState.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MDGameMode.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MDPlayerController.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MDPawn.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MDPlayerState.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
 </Project>
