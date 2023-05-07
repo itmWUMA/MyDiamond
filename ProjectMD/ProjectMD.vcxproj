@@ -127,17 +127,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="MDActor.h" />
+    <ClInclude Include="MDDefines.h" />
+    <ClInclude Include="MDDiamond.h" />
     <ClInclude Include="MDGameMode.h" />
     <ClInclude Include="MDPawn.h" />
     <ClInclude Include="MDPlayerController.h" />
     <ClInclude Include="MDPlayerState.h" />
+    <ClInclude Include="MDRenderComponent.h" />
+    <ClInclude Include="MDSceneComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MDActor.cpp" />
+    <ClCompile Include="MDDiamond.cpp" />
     <ClCompile Include="MDGameMode.cpp" />
     <ClCompile Include="MDPawn.cpp" />
     <ClCompile Include="MDPlayerController.cpp" />
     <ClCompile Include="MDPlayerState.cpp" />
+    <ClCompile Include="MDRenderComponent.cpp" />
+    <ClCompile Include="MDSceneComponent.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

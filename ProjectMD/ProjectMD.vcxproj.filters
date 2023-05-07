@@ -27,6 +27,21 @@
     <ClInclude Include="MDPlayerState.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="MDDiamond.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MDRenderComponent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MDSceneComponent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MDActor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MDDefines.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MDGameMode.cpp">
@@ -42,6 +57,18 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="MDPlayerState.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MDDiamond.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MDRenderComponent.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MDSceneComponent.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MDActor.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

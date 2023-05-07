@@ -1,11 +1,12 @@
 #pragma once
 
 #include <memory>
+#include "MDActor.h"
 using namespace std;
 
 class MDPlayerState;
 
-class MDPawn
+class MDPawn : public MDActor
 {
 public:
     MDPawn() = default;
