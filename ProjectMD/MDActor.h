@@ -9,6 +9,8 @@ class MDActor
 {
 public:
     MDActor();
+    virtual ~MDActor() = default;
+    virtual void Render() const {}
 
 public:
     std::shared_ptr<MDSceneComponent> SceneComponent;

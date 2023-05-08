@@ -4,5 +4,5 @@ using namespace std;
 
 void MDRenderComponent::Render(char Texture) const
 {
-    cout << Texture << ' ';
+    cout << Texture;
 }

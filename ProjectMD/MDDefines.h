@@ -12,4 +12,12 @@ enum class EDiamondType
     TYPE_FIVE = 0x10,
 };
 
+enum class EMoveDirection
+{
+    UP = 0x1,
+    RIGHT = 0x2,
+    DOWN = 0x4,
+    LEFT = 0x8,
+};
+
 typedef pair<int, int> Vector2D;

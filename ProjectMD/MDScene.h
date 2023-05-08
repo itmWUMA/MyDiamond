@@ -25,7 +25,9 @@ public:
     bool CheckActorPosition(const shared_ptr<MDActor>& Actor) const;
     void RegisterActor(const shared_ptr<MDActor>& Actor);
     void UnRegisterActor(const shared_ptr<MDActor>& Actor);
+    bool CheckRegister(const shared_ptr<MDActor>& Actor) const;
     void UpdateSlots();
+    void RenderSence() const;
 
 private:
     MDScene();
@@ -33,6 +35,8 @@ private:
     MDScene& operator=(const MDScene& Scene) = delete;
     void ClearSlots();
     shared_ptr<MDActor>& GetSlotByActor_Unchecked(const shared_ptr<MDActor>& Actor);
+    static void NullRender();
+    static void RenderNewLine();
 
 private:
     static MDScene* SceneInstance;
