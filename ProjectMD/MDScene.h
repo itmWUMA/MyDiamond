@@ -7,6 +7,7 @@
 using namespace std;
 
 class MDActor;
+class MDGameMode;
 
 /* A singleton scene which contains actors */
 class MDScene
@@ -28,6 +29,8 @@ public:
     bool CheckRegister(const shared_ptr<MDActor>& Actor) const;
     void UpdateSlots();
     void RenderSence() const;
+    void ChangeGameMode(const shared_ptr<MDGameMode>& NewGameMode);
+    shared_ptr<MDGameMode> GetGameMode() const;
 
 private:
     MDScene();
@@ -50,4 +53,6 @@ private:
 
     /* A list recording all actors which have been registered */
     unordered_set<shared_ptr<MDActor>> ActorSet;
+
+    shared_ptr<MDGameMode> CurrentGameMode = nullptr;
 };

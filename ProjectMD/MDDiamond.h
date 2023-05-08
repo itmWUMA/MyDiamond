@@ -15,6 +15,8 @@ public:
     MDDiamond(char Texture, EDiamondType DiamondType);
     virtual void Render() const override;
     void Move(EMoveDirection Direction);
+    /* Eliminate all suitable diamonds and return the count of eliminated diamonds */
+    int Eliminate(const shared_ptr<MDDiamond>& StartDiamond);
 
 private:
 

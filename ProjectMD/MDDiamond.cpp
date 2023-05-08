@@ -38,4 +38,15 @@ void MDDiamond::Move(EMoveDirection Direction)
     }
 
     SceneComponent->SetVector(NewPosition);
+    Scene->UpdateSlots();
+}
+
+int MDDiamond::Eliminate(const shared_ptr<MDDiamond>& StartDiamond)
+{
+    if (StartDiamond->DiamondType != this->DiamondType)
+    {
+        return 0;
+    }
+
+    
 }

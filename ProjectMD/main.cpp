@@ -1,5 +1,6 @@
 #include "MDDiamond.h"
 #include "MDGameMode.h"
+#include "MDGameState.h"
 #include "MDPawn.h"
 #include "MDPlayerController.h"
 #include "MDPlayerState.h"
@@ -10,7 +11,9 @@ shared_ptr<MDGameMode> InitGameMode()
     shared_ptr<MDPawn> DefaultPawn = make_shared<MDPawn>();
     shared_ptr<MDPlayerController> PlayerController = make_shared<MDPlayerController>();
     shared_ptr<MDPlayerState> PlayerState = make_shared<MDPlayerState>();
-    shared_ptr<MDGameMode> GameModeInstance = make_shared<MDGameMode>(DefaultPawn, PlayerController, PlayerState);
+    shared_ptr<MDGameState> GameState = make_shared<MDGameState>();
+    shared_ptr<MDGameMode> GameModeInstance = make_shared<MDGameMode>(DefaultPawn, PlayerController, PlayerState, GameState);
+    MDScene::Get()->ChangeGameMode(GameModeInstance);
     return GameModeInstance;
 }
 
@@ -22,7 +25,6 @@ void DebugTest()
     MDScene::Get()->RegisterActor(Diamond);
     Diamond->Move(EMoveDirection::RIGHT);
     Diamond->Move(EMoveDirection::DOWN);
-    MDScene::Get()->UpdateSlots();
     MDScene::Get()->RenderSence();
 }
 #endif

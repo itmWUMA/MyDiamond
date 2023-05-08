@@ -131,6 +131,7 @@
     <ClInclude Include="MDDefines.h" />
     <ClInclude Include="MDDiamond.h" />
     <ClInclude Include="MDGameMode.h" />
+    <ClInclude Include="MDGameState.h" />
     <ClInclude Include="MDMovementComponent.h" />
     <ClInclude Include="MDPawn.h" />
     <ClInclude Include="MDPlayerController.h" />
@@ -144,6 +145,7 @@
     <ClCompile Include="MDActor.cpp" />
     <ClCompile Include="MDDiamond.cpp" />
     <ClCompile Include="MDGameMode.cpp" />
+    <ClCompile Include="MDGameState.cpp" />
     <ClCompile Include="MDMovementComponent.cpp" />
     <ClCompile Include="MDPawn.cpp" />
     <ClCompile Include="MDPlayerController.cpp" />

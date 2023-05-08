@@ -114,3 +114,13 @@ void MDScene::RenderSence() const
         RenderNewLine();
     }
 }
+
+void MDScene::ChangeGameMode(const shared_ptr<MDGameMode>& NewGameMode)
+{
+    CurrentGameMode = NewGameMode;
+}
+
+shared_ptr<MDGameMode> MDScene::GetGameMode() const
+{
+    return CurrentGameMode;
+}

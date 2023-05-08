@@ -48,6 +48,9 @@
     <ClInclude Include="MDMovementComponent.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="MDGameState.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MDGameMode.cpp">
@@ -81,6 +84,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="MDMovementComponent.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MDGameState.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
