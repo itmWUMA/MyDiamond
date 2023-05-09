@@ -28,7 +28,7 @@ void DebugTest()
     shared_ptr<MDDiamond> Diamond2 = make_shared<MDDiamond>('+', EDiamondType::TYPE_ONE);
     MDScene::Get()->RegisterActor(Diamond2);
     Diamond2->MoveToPosition(Vector2D(1, 0));
-    shared_ptr<MDDiamond> Diamond3 = make_shared<MDDiamond>('+', EDiamondType::TYPE_ONE);
+    shared_ptr<MDDiamond> Diamond3 = make_shared<MDDiamond>('*', EDiamondType::TYPE_FIVE);
     MDScene::Get()->RegisterActor(Diamond3);
     Diamond3->MoveToPosition(Vector2D(1, 1));
     shared_ptr<MDDiamond> Diamond4 = make_shared<MDDiamond>('+', EDiamondType::TYPE_ONE);
@@ -44,7 +44,7 @@ void DebugTest()
     MDScene::Get()->RegisterActor(Diamond7);
     Diamond7->MoveToPosition(Vector2D(0, 4));
 
-    Diamond6->Eliminate(EDiamondType::TYPE_ONE);
+    MDDiamondUtilities::EliminateDiamonds(Diamond6, EDiamondType::TYPE_ONE);
 
     MDScene::Get()->RenderSence();
 }

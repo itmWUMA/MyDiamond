@@ -75,7 +75,7 @@ void MDScene::RegisterActor(const shared_ptr<MDActor>& Actor)
 void MDScene::UnRegisterActor(const shared_ptr<MDActor>& Actor)
 {
     const auto ActorIter = ActorSet.find(Actor);
-    if (*ActorIter)
+    if (ActorIter != ActorSet.end())
     {
         GetSlotByActor_Unchecked(*ActorIter) = nullptr;
         ActorSet.erase(ActorIter);

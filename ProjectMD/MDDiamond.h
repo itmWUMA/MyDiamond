@@ -1,8 +1,10 @@
 #pragma once
 
 #include <memory>
+#include <unordered_set>
 #include "MDActor.h"
 #include "MDDefines.h"
+#include "MDDiamondUtilities.h"
 using namespace std;
 
 class MDRenderComponent;
@@ -13,17 +15,14 @@ enum class EMoveDirection;
 
 class MDDiamond : public MDActor
 {
+    friend MDDiamondUtilities;
+
 public:
     MDDiamond(char Texture, EDiamondType DiamondType);
     virtual void Render() const override;
     void Move(EMoveDirection Direction);
     void MoveToPosition(Vector2D TargetPosition);
     /* Eliminate all suitable diamonds and return the count of eliminated diamonds */
-    void Eliminate(EDiamondType EliminateType);
-
-private:
-    int FindAllEliminatedDiamond(EDiamondType EliminateType, const shared_ptr<MDGameState>& GameState);
-    int CheckNeighborhood(EDiamondType EliminateType, const shared_ptr<MDGameState>& GameState, EMoveDirection CheckDirection) const;
 
 public:
     char Texture;

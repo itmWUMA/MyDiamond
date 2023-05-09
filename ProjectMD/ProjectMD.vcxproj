@@ -130,6 +130,7 @@
     <ClInclude Include="MDActor.h" />
     <ClInclude Include="MDDefines.h" />
     <ClInclude Include="MDDiamond.h" />
+    <ClInclude Include="MDDiamondUtilities.h" />
     <ClInclude Include="MDGameMode.h" />
     <ClInclude Include="MDGameState.h" />
     <ClInclude Include="MDMovementComponent.h" />
@@ -144,6 +145,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MDActor.cpp" />
     <ClCompile Include="MDDiamond.cpp" />
+    <ClCompile Include="MDDiamondUtilities.cpp" />
     <ClCompile Include="MDGameMode.cpp" />
     <ClCompile Include="MDGameState.cpp" />
     <ClCompile Include="MDMovementComponent.cpp" />
