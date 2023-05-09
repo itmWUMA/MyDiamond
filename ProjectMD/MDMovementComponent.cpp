@@ -2,6 +2,11 @@
 
 Vector2D MDMovementComponent::Move(const Vector2D& StartPosition, EMoveDirection Direction) const
 {
+    return Move(StartPosition, Direction, DefaultStep);
+}
+
+Vector2D MDMovementComponent::Move(const Vector2D& StartPosition, EMoveDirection Direction, int Step) const
+{
     Vector2D EndPosition;
     switch (Direction)
     {
