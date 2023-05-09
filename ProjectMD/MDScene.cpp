@@ -82,9 +82,14 @@ void MDScene::UnRegisterActor(const shared_ptr<MDActor>& Actor)
     }
 }
 
-bool MDScene::CheckRegister(const shared_ptr<MDActor>& Actor) const
+bool MDScene::CheckRegister(const MDActor* ActorPtr) const
 {
-    return *(ActorSet.find(Actor)) != nullptr;
+    auto Result = find_if(ActorSet.begin(), ActorSet.end(),
+        [ActorPtr](const std::shared_ptr<MDActor>& Elem) -> bool
+        {
+            return Elem.get() == ActorPtr;
+        });
+    return (*Result) != nullptr;
 }
 
 void MDScene::UpdateSlots()

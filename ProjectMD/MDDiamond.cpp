@@ -24,10 +24,10 @@ void MDDiamond::Move(EMoveDirection Direction)
     MDScene* Scene = MDScene::Get();
 
     // if not registered, which means the actor is not exist in the scene
-    //if (!Scene->CheckRegister(make_shared<MDDiamond>(*this)))
-    //{
-    //    return;
-    //}
+    if (!Scene->CheckRegister(this))
+    {
+        return;
+    }
 
     const Vector2D CurPosition = SceneComponent->GetVector();
     const Vector2D NewPosition = MovementComponent->Move(CurPosition, Direction);

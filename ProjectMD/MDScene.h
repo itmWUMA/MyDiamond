@@ -26,7 +26,7 @@ public:
     bool CheckActorPosition(const shared_ptr<MDActor>& Actor) const;
     void RegisterActor(const shared_ptr<MDActor>& Actor);
     void UnRegisterActor(const shared_ptr<MDActor>& Actor);
-    bool CheckRegister(const shared_ptr<MDActor>& Actor) const;
+    bool CheckRegister(const MDActor* ActorPtr) const;
     void UpdateSlots();
     void RenderSence() const;
     void ChangeGameMode(const shared_ptr<MDGameMode>& NewGameMode);
