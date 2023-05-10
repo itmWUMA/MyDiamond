@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="InputCommand.h" />
     <ClInclude Include="MDActor.h" />
     <ClInclude Include="MDDebugger.h" />
     <ClInclude Include="MDDefines.h" />
@@ -134,6 +135,7 @@
     <ClInclude Include="MDDiamondUtilities.h" />
     <ClInclude Include="MDGameMode.h" />
     <ClInclude Include="MDGameState.h" />
+    <ClInclude Include="MDInputComponent.h" />
     <ClInclude Include="MDMovementComponent.h" />
     <ClInclude Include="MDPawn.h" />
     <ClInclude Include="MDPlayerController.h" />
@@ -143,6 +145,7 @@
     <ClInclude Include="MDSceneComponent.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="InputCommand.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MDActor.cpp" />
     <ClCompile Include="MDDebugger.cpp" />
@@ -150,6 +153,7 @@
     <ClCompile Include="MDDiamondUtilities.cpp" />
     <ClCompile Include="MDGameMode.cpp" />
     <ClCompile Include="MDGameState.cpp" />
+    <ClCompile Include="MDInputComponent.cpp" />
     <ClCompile Include="MDMovementComponent.cpp" />
     <ClCompile Include="MDPawn.cpp" />
     <ClCompile Include="MDPlayerController.cpp" />

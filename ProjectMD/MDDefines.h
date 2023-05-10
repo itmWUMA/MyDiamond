@@ -22,5 +22,18 @@ enum class EMoveDirection
 
 typedef pair<int, int> Vector2D;
 
+constexpr int Keycode_A = 65;
+constexpr int Keycode_W = 87;
+constexpr int Keycode_S = 83;
+constexpr int Keycode_D = 68;
+constexpr int Keycode_a = 97;
+constexpr int Keycode_w = 119;
+constexpr int Keycode_s = 115;
+constexpr int Keycode_d = 100;
+constexpr int Keycode_Up = 72;
+constexpr int Keycode_Down = 80;
+constexpr int Keycode_Left = 75;
+constexpr int Keycode_Right = 77;
+
 #define DEBUG_LOG_PATH "./debug/log.txt"
 #define DEBUG_FUNC_SIGN ((string(__FUNCTION__) + string("\n")).c_str())

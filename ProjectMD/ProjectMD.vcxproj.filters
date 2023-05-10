@@ -57,6 +57,12 @@
     <ClInclude Include="MDDebugger.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="MDInputComponent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="InputCommand.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MDGameMode.cpp">
@@ -99,6 +105,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="MDDebugger.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MDInputComponent.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="InputCommand.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

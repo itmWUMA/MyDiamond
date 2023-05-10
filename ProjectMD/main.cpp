@@ -9,7 +9,7 @@
 
 shared_ptr<MDGameMode> InitGameMode()
 {
-    shared_ptr<MDPawn> DefaultPawn = make_shared<MDPawn>();
+    shared_ptr<MDPawn> DefaultPawn = make_shared<MDPawn>('@');
     shared_ptr<MDPlayerController> PlayerController = make_shared<MDPlayerController>();
     shared_ptr<MDPlayerState> PlayerState = make_shared<MDPlayerState>();
     shared_ptr<MDGameState> GameState = make_shared<MDGameState>();
