@@ -1,6 +1,7 @@
 #include "MDPlayerController.h"
 #include "MDInputComponent.h"
 #include "MDPawn.h"
+#include "MDPlayerState.h"
 
 MDPlayerController::MDPlayerController()
 {
@@ -36,4 +37,5 @@ void MDPlayerController::OnPawnMove(EMoveDirection Direction) const
     }
 
     PossessedPawn->Move(Direction);
+    ++PlayerState->PlayerStepCount;
 }

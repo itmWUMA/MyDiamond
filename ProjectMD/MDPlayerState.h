@@ -9,6 +9,9 @@ public:
     MDPlayerState(const Vector2D& DefaultSpawnPosition);
     inline Vector2D GetDefaultSpawnPosition() const { return DefaultSpawnPosition; }
 
+public:
+    int PlayerStepCount = 0;
+
 private:
     Vector2D DefaultSpawnPosition;
 };
