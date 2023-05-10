@@ -8,7 +8,7 @@ class MDPlayerState;
 class MDRenderComponent;
 class MDMovementComponent;
 
-class MDPawn : public MDActor
+class MDPawn : public MDActor, public enable_shared_from_this<MDPawn>
 {
 public:
     MDPawn(char Texture);
@@ -16,6 +16,8 @@ public:
     MDPawn(char Texture, const shared_ptr<MDPlayerState>& PlayerState);
 
     void InitPawn(const shared_ptr<MDPlayerState>& PlayerStateIns);
+    void Move(EMoveDirection Direction);
+    virtual void Render() const override;
 
 private:
     char Texture;

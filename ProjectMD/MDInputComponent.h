@@ -11,7 +11,4 @@ class MDInputComponent
 public:
     MDInputComponent(const weak_ptr<MDPlayerController>& OwnerCache);
     shared_ptr<IInputCommand> HandleInput() const;
-
-private:
-    weak_ptr<MDPlayerController> OwnerCache;
 };

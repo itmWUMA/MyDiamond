@@ -1,7 +1,9 @@
+#include "InputCommand.h"
 #include "MDDebugger.h"
 #include "MDDiamond.h"
 #include "MDGameMode.h"
 #include "MDGameState.h"
+#include "MDInputComponent.h"
 #include "MDPawn.h"
 #include "MDPlayerController.h"
 #include "MDPlayerState.h"
@@ -11,7 +13,7 @@ shared_ptr<MDGameMode> InitGameMode()
 {
     shared_ptr<MDPawn> DefaultPawn = make_shared<MDPawn>('@');
     shared_ptr<MDPlayerController> PlayerController = make_shared<MDPlayerController>();
-    shared_ptr<MDPlayerState> PlayerState = make_shared<MDPlayerState>();
+    shared_ptr<MDPlayerState> PlayerState = make_shared<MDPlayerState>(Vector2D(9, 2));
     shared_ptr<MDGameState> GameState = make_shared<MDGameState>();
     shared_ptr<MDGameMode> GameModeInstance = make_shared<MDGameMode>(DefaultPawn, PlayerController, PlayerState, GameState);
     MDScene::Get()->ChangeGameMode(GameModeInstance);
@@ -45,9 +47,15 @@ void DebugTest()
     MDScene::Get()->RegisterActor(Diamond7);
     Diamond7->MoveToPosition(Vector2D(0, 4));
 
-    MDDiamondUtilities::EliminateDiamonds(Diamond6, EDiamondType::TYPE_ONE);
+    //MDDiamondUtilities::EliminateDiamonds(Diamond6, EDiamondType::TYPE_ONE);
 
-    MDScene::Get()->RenderSence();
+    while (true)
+    {
+        auto command = GameModeInstance->GetPlayerController()->InputComponent->HandleInput();
+        command->Execute(GameModeInstance->GetPlayerController());
+        MDScene::Get()->RenderSence();
+    }
+
 }
 #endif
 

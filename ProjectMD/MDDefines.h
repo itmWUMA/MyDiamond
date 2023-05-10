@@ -34,6 +34,7 @@ constexpr int Keycode_Up = 72;
 constexpr int Keycode_Down = 80;
 constexpr int Keycode_Left = 75;
 constexpr int Keycode_Right = 77;
+constexpr int Keycode_DirectionKey_FirstInputCode = 224;
 
 #define DEBUG_LOG_PATH "./debug/log.txt"
 #define DEBUG_FUNC_SIGN ((string(__FUNCTION__) + string("\n")).c_str())

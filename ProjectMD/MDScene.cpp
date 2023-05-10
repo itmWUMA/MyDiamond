@@ -1,5 +1,6 @@
 #include "MDScene.h"
 #include <iostream>
+#include "Windows.h"
 #include "MDActor.h"
 #include "MDDebugger.h"
 #include "MDSceneComponent.h"
@@ -111,6 +112,7 @@ void MDScene::UpdateSlots()
 
 void MDScene::RenderSence() const
 {
+    system("cls");
     for (const vector<shared_ptr<MDActor>>& Row : Slots)
     {
         for (const shared_ptr<MDActor>& SlotElem : Row)

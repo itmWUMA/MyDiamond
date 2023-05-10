@@ -13,6 +13,7 @@ MDGameMode::MDGameMode(const shared_ptr<MDPawn>& DefaultPawn,
 {
     this->DefaultPawn->InitPawn(this->PlayerState);
     this->PlayerController->InitPlayerController(this->PlayerState);
+    this->PlayerController->Possess(this->DefaultPawn);
 }
 
 shared_ptr<MDPawn> MDGameMode::GetDefaultPawn() const

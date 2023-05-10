@@ -2,16 +2,12 @@
 
 #include "MDPlayerController.h"
 
-MDMoveCommand::MDMoveCommand(const weak_ptr<MDPlayerController>& PlayerControllerCahce, EMoveDirection Direction)
+MDMoveCommand::MDMoveCommand(EMoveDirection Direction)
     :Direction(Direction)
 {
-    this->PlayerControllerCache = PlayerControllerCahce;
 }
 
-void MDMoveCommand::Execute()
+void MDMoveCommand::Execute(const shared_ptr<MDPlayerController>& PlayerController)
 {
-    if (!PlayerControllerCache.expired())
-    {
-        PlayerControllerCache.lock()->OnPawnMove(Direction);
-    }
+    PlayerController->OnPawnMove(Direction);
 }
