@@ -30,7 +30,7 @@ void MDPlayerController::UnPossess()
 
 void MDPlayerController::OnPawnMove(EMoveDirection Direction) const
 {
-    if (!PossessedPawn)
+    if (!PossessedPawn || Direction == EMoveDirection::UP || Direction == EMoveDirection::DOWN)
     {
         return;
     }

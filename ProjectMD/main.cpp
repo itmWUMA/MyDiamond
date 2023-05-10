@@ -49,6 +49,7 @@ void DebugTest()
 
     //MDDiamondUtilities::EliminateDiamonds(Diamond6, EDiamondType::TYPE_ONE);
 
+    MDScene::Get()->RenderSence();
     while (true)
     {
         auto command = GameModeInstance->GetPlayerController()->InputComponent->HandleInput();
