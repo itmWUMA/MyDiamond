@@ -1,6 +1,7 @@
 #include "MDScene.h"
 #include <iostream>
 #include "MDActor.h"
+#include "MDDebugger.h"
 #include "MDSceneComponent.h"
 using namespace std;
 
@@ -37,6 +38,13 @@ void MDScene::NullRender()
 void MDScene::RenderNewLine()
 {
     cout << '\n';
+}
+
+MDScene::~MDScene()
+{
+#if _DEBUG
+    MDDebugger::Log(DEBUG_FUNC_SIGN);
+#endif 
 }
 
 shared_ptr<MDActor> MDScene::GetActorByPosition(const Vector2D& Position) const

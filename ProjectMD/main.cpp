@@ -1,3 +1,4 @@
+#include "MDDebugger.h"
 #include "MDDiamond.h"
 #include "MDGameMode.h"
 #include "MDGameState.h"

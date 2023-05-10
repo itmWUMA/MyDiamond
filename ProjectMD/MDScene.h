@@ -19,6 +19,7 @@ public:
     static MDScene* Get() { return SceneInstance; }
 
 public:
+    ~MDScene();
     inline int GetRow() const { return SizeX; }
     inline int GetCol() const { return SizeY; }
     shared_ptr<MDActor> GetActorByPosition(const Vector2D& ActorPosition) const;

@@ -18,11 +18,11 @@ class MDDiamond : public MDActor
     friend MDDiamondUtilities;
 
 public:
+    virtual ~MDDiamond() override;
     MDDiamond(char Texture, EDiamondType DiamondType);
     virtual void Render() const override;
     void Move(EMoveDirection Direction);
     void MoveToPosition(Vector2D TargetPosition);
-    /* Eliminate all suitable diamonds and return the count of eliminated diamonds */
 
 public:
     char Texture;

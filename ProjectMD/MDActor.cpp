@@ -1,4 +1,6 @@
 #include "MDActor.h"
+
+#include "MDDebugger.h"
 #include "MDScene.h"
 #include "MDSceneComponent.h"
 

@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="MDActor.h" />
+    <ClInclude Include="MDDebugger.h" />
     <ClInclude Include="MDDefines.h" />
     <ClInclude Include="MDDiamond.h" />
     <ClInclude Include="MDDiamondUtilities.h" />
@@ -144,6 +145,7 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MDActor.cpp" />
+    <ClCompile Include="MDDebugger.cpp" />
     <ClCompile Include="MDDiamond.cpp" />
     <ClCompile Include="MDDiamondUtilities.cpp" />
     <ClCompile Include="MDGameMode.cpp" />

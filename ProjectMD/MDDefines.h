@@ -21,3 +21,6 @@ enum class EMoveDirection
 };
 
 typedef pair<int, int> Vector2D;
+
+#define DEBUG_LOG_PATH "./debug/log.txt"
+#define DEBUG_FUNC_SIGN ((string(__FUNCTION__) + string("\n")).c_str())

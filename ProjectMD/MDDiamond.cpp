@@ -1,11 +1,19 @@
 #include "MDDiamond.h"
+
+#include "MDDebugger.h"
 #include "MDDefines.h"
 #include "MDGameMode.h"
-#include "MDGameState.h"
 #include "MDMovementComponent.h"
 #include "MDRenderComponent.h"
 #include "MDScene.h"
 #include "MDSceneComponent.h"
+
+MDDiamond::~MDDiamond()
+{
+#if _DEBUG
+    MDDebugger::Log(DEBUG_FUNC_SIGN);
+#endif 
+}
 
 MDDiamond::MDDiamond(char Texture, EDiamondType DiamondType)
     : Texture(Texture), DiamondType(DiamondType)
