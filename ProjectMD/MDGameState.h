@@ -12,5 +12,6 @@ public:
 
 public:
     unordered_set<MDDiamond*> EliminatedDiamondSet;
+    int TurnCount = 0;
 };
 

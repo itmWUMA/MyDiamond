@@ -11,6 +11,7 @@ public:
 
 public:
     int PlayerStepCount = 0;
+    int Score = 0;
 
 private:
     Vector2D DefaultSpawnPosition;

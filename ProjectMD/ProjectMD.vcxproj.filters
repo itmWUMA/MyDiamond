@@ -66,6 +66,9 @@
     <ClInclude Include="MDGameInstance.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="MDUserWidget.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MDGameMode.cpp">
@@ -117,6 +120,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="MDGameInstance.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MDUserWidget.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

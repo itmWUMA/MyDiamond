@@ -17,6 +17,7 @@ public:
 
 public:
     static MDScene* Get();
+    static void DeleteScene();
 
 public:
     ~MDScene();
@@ -30,10 +31,8 @@ public:
     bool CheckRegister(const MDActor* ActorPtr) const;
     void UpdateSlots();
     void RenderSence() const;
-    void RenderQuitUI() const;
     void ChangeGameMode(const shared_ptr<MDGameMode>& NewGameMode);
     shared_ptr<MDGameMode> GetGameMode() const;
-    static void DeleteScene();
 
 private:
     MDScene();

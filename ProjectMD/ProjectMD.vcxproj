@@ -144,6 +144,7 @@
     <ClInclude Include="MDRenderComponent.h" />
     <ClInclude Include="MDScene.h" />
     <ClInclude Include="MDSceneComponent.h" />
+    <ClInclude Include="MDUserWidget.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="InputCommand.cpp" />
@@ -163,6 +164,7 @@
     <ClCompile Include="MDRenderComponent.cpp" />
     <ClCompile Include="MDScene.cpp" />
     <ClCompile Include="MDSceneComponent.cpp" />
+    <ClCompile Include="MDUserWidget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="debug\log.txt" />

@@ -122,7 +122,6 @@ void MDScene::UpdateSlots()
 
 void MDScene::RenderSence() const
 {
-    system("cls");
     for (const vector<shared_ptr<MDActor>>& Row : Slots)
     {
         for (const shared_ptr<MDActor>& SlotElem : Row)
@@ -138,13 +137,6 @@ void MDScene::RenderSence() const
         }
         RenderNewLine();
     }
-}
-
-void MDScene::RenderQuitUI() const
-{
-    system("cls");
-    cout << "GOODBYE~~~";
-    RenderNewLine();
 }
 
 void MDScene::ChangeGameMode(const shared_ptr<MDGameMode>& NewGameMode)

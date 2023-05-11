@@ -10,6 +10,7 @@
 #include "MDPlayerController.h"
 #include "MDPlayerState.h"
 #include "MDScene.h"
+#include "MDUserWidget.h"
 
 unique_ptr<MDGameInstance> GameInstance;
 
@@ -32,7 +33,8 @@ void MDGameInstance::CreateGameMode()
     shared_ptr<MDPlayerController> PlayerController = make_shared<MDPlayerController>();
     shared_ptr<MDPlayerState> PlayerState = make_shared<MDPlayerState>(Vector2D(9, 2));
     shared_ptr<MDGameState> GameState = make_shared<MDGameState>();
-    GameMode = make_shared<MDGameMode>(DefaultPawn, PlayerController, PlayerState, GameState);
+    shared_ptr<MDUserWidget> HUD = make_shared<MDUserWidget>();
+    GameMode = make_shared<MDGameMode>(DefaultPawn, PlayerController, PlayerState, GameState, HUD);
     MDScene::Get()->ChangeGameMode(GameMode);
 }
 
@@ -65,14 +67,14 @@ void MDGameInstance::InitScene()
 
 void MDGameInstance::OnEndGame() const
 {
-    MDScene::Get()->RenderQuitUI();
+    GameMode->GetHUD()->RenderQuitUI();
     MDScene::DeleteScene();
 }
 
 void MDGameInstance::Play()
 {
 #if _DEBUG
-    MDScene::Get()->RenderSence();
+    GameMode->GetHUD()->Render();
     while (!bQuitGame)
     {
         shared_ptr<IInputCommand> Command = GameMode->GetPlayerController()->InputComponent->HandleInput();
@@ -81,7 +83,7 @@ void MDGameInstance::Play()
             Command->Execute(GameMode->GetPlayerController());
         }
 
-        bQuitGame ? OnEndGame() : MDScene::Get()->RenderSence();
+        bQuitGame ? OnEndGame() : GameMode->GetHUD()->Render();
     }
 #endif
 }
