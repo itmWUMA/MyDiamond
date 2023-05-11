@@ -140,6 +140,13 @@ void MDScene::RenderSence() const
     }
 }
 
+void MDScene::RenderQuitUI() const
+{
+    system("cls");
+    cout << "GOODBYE~~~";
+    RenderNewLine();
+}
+
 void MDScene::ChangeGameMode(const shared_ptr<MDGameMode>& NewGameMode)
 {
     CurrentGameMode = NewGameMode;

@@ -5,9 +5,8 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-    {
-        GameInstance->Play();
-    }
+    GameInstance = new MDGameInstance;
+    GameInstance->Play();
 
     return 0;
 }

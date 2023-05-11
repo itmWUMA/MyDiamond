@@ -10,13 +10,12 @@
 #include "MDPlayerState.h"
 #include "MDScene.h"
 
-unique_ptr<MDGameInstance> GameInstance = make_unique<MDGameInstance>();
+MDGameInstance* GameInstance = nullptr;
 
 MDGameInstance::MDGameInstance()
 {
     CreateGameMode();
     InitScene();
-    Play();
 }
 
 void MDGameInstance::CreateGameMode()
@@ -60,14 +59,20 @@ void MDGameInstance::Play()
 {
 #if _DEBUG
     MDScene::Get()->RenderSence();
-    while (true)
+    while (!bQuitGame)
     {
         shared_ptr<IInputCommand> Command = GameMode->GetPlayerController()->InputComponent->HandleInput();
         if (Command)
         {
             Command->Execute(GameMode->GetPlayerController());
         }
-        MDScene::Get()->RenderSence();
+
+        bQuitGame ? MDScene::Get()->RenderQuitUI() : MDScene::Get()->RenderSence();
     }
 #endif
+}
+
+void MDGameInstance::QuitGame()
+{
+    bQuitGame = true;
 }

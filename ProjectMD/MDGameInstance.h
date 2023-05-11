@@ -9,6 +9,7 @@ class MDGameInstance
 public:
     MDGameInstance();
     void Play();
+    void QuitGame();
 
 private:
     void CreateGameMode();
@@ -16,6 +17,7 @@ private:
 
 private:
     shared_ptr<MDGameMode> GameMode;
+    bool bQuitGame = false;
 };
 
-extern unique_ptr<MDGameInstance> GameInstance;
+extern MDGameInstance* GameInstance;

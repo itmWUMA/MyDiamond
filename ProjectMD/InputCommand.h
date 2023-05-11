@@ -26,4 +26,5 @@ private:
 class MDQuitGameCommand : public IInputCommand
 {
 public:
+    virtual void Execute(const shared_ptr<MDPlayerController>& PlayerController) override;
 };

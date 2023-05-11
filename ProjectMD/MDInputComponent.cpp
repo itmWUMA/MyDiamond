@@ -33,7 +33,7 @@ shared_ptr<IInputCommand> MDInputComponent::HandleInput() const
             return make_shared<MDMoveCommand>(EMoveDirection::RIGHT);
             // Esc
         case Keycode_Esc:
-            return nullptr;
+            return make_shared<MDQuitGameCommand>();
         default:
             return nullptr;
         }
