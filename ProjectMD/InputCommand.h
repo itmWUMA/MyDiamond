@@ -22,3 +22,8 @@ public:
 private:
     EMoveDirection Direction;
 };
+
+class MDQuitGameCommand : public IInputCommand
+{
+public:
+};

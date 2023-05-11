@@ -6,7 +6,7 @@
 #include "MDSceneComponent.h"
 using namespace std;
 
-MDScene* MDScene::SceneInstance = new MDScene();
+MDScene* MDScene::SceneInstance = nullptr;
 
 MDScene::MDScene()
 {
@@ -39,6 +39,16 @@ void MDScene::NullRender()
 void MDScene::RenderNewLine()
 {
     cout << '\n';
+}
+
+MDScene* MDScene::Get()
+{
+    if (!SceneInstance)
+    {
+        SceneInstance = new MDScene;
+    }
+
+    return SceneInstance;
 }
 
 MDScene::~MDScene()

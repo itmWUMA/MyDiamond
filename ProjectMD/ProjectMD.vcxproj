@@ -164,6 +164,9 @@
     <ClCompile Include="MDScene.cpp" />
     <ClCompile Include="MDSceneComponent.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="debug\log.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

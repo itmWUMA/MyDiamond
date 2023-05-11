@@ -16,7 +16,7 @@ public:
     typedef vector<vector<shared_ptr<MDActor>>> Map;
 
 public:
-    static MDScene* Get() { return SceneInstance; }
+    static MDScene* Get();
 
 public:
     ~MDScene();

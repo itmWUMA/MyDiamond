@@ -18,3 +18,4 @@ private:
     shared_ptr<MDGameMode> GameMode;
 };
 
+extern unique_ptr<MDGameInstance> GameInstance;

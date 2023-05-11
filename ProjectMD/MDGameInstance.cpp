@@ -10,6 +10,8 @@
 #include "MDPlayerState.h"
 #include "MDScene.h"
 
+unique_ptr<MDGameInstance> GameInstance = make_unique<MDGameInstance>();
+
 MDGameInstance::MDGameInstance()
 {
     CreateGameMode();
@@ -60,8 +62,11 @@ void MDGameInstance::Play()
     MDScene::Get()->RenderSence();
     while (true)
     {
-        auto command = GameMode->GetPlayerController()->InputComponent->HandleInput();
-        command->Execute(GameMode->GetPlayerController());
+        shared_ptr<IInputCommand> Command = GameMode->GetPlayerController()->InputComponent->HandleInput();
+        if (Command)
+        {
+            Command->Execute(GameMode->GetPlayerController());
+        }
         MDScene::Get()->RenderSence();
     }
 #endif
