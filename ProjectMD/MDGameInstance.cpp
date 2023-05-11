@@ -1,6 +1,7 @@
 #include "MDGameInstance.h"
 
 #include "InputCommand.h"
+#include "MDDebugger.h"
 #include "MDDefines.h"
 #include "MDDiamond.h"
 #include "MDGameState.h"
@@ -10,12 +11,19 @@
 #include "MDPlayerState.h"
 #include "MDScene.h"
 
-MDGameInstance* GameInstance = nullptr;
+unique_ptr<MDGameInstance> GameInstance;
 
 MDGameInstance::MDGameInstance()
 {
     CreateGameMode();
     InitScene();
+}
+
+MDGameInstance::~MDGameInstance()
+{
+#if _DEBUG
+    MDDebugger::Log(DEBUG_FUNC_SIGN);
+#endif
 }
 
 void MDGameInstance::CreateGameMode()
@@ -55,6 +63,12 @@ void MDGameInstance::InitScene()
 #endif
 }
 
+void MDGameInstance::OnEndGame() const
+{
+    MDScene::Get()->RenderQuitUI();
+    MDScene::DeleteScene();
+}
+
 void MDGameInstance::Play()
 {
 #if _DEBUG
@@ -67,7 +81,7 @@ void MDGameInstance::Play()
             Command->Execute(GameMode->GetPlayerController());
         }
 
-        bQuitGame ? MDScene::Get()->RenderQuitUI() : MDScene::Get()->RenderSence();
+        bQuitGame ? OnEndGame() : MDScene::Get()->RenderSence();
     }
 #endif
 }

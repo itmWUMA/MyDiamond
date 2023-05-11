@@ -31,6 +31,11 @@ void MDDiamond::Render() const
 
 void MDDiamond::Move(EMoveDirection Direction)
 {
+    Move(Direction, MovementComponent->GetStep());
+}
+
+void MDDiamond::Move(EMoveDirection Direction, int Step)
+{
     MDScene* Scene = MDScene::Get();
 
     // if not registered, which means the actor is not exist in the scene
@@ -40,7 +45,7 @@ void MDDiamond::Move(EMoveDirection Direction)
     }
 
     const Vector2D CurPosition = SceneComponent->GetVector();
-    const Vector2D NewPosition = MovementComponent->Move(CurPosition, Direction);
+    const Vector2D NewPosition = MovementComponent->Move(CurPosition, Direction, Step);
 
     if (!MDScene::Get()->CheckActorPosition(NewPosition))
     {

@@ -22,6 +22,7 @@ public:
     MDDiamond(char Texture, EDiamondType DiamondType);
     virtual void Render() const override;
     void Move(EMoveDirection Direction);
+    void Move(EMoveDirection Direction, int Step);
     void MoveToPosition(Vector2D TargetPosition);
 
 public:

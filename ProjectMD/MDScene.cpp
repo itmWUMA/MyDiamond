@@ -156,3 +156,9 @@ shared_ptr<MDGameMode> MDScene::GetGameMode() const
 {
     return CurrentGameMode;
 }
+
+void MDScene::DeleteScene()
+{
+    delete SceneInstance;
+    SceneInstance = nullptr;
+}

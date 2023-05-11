@@ -5,8 +5,10 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-    GameInstance = new MDGameInstance;
-    GameInstance->Play();
+    {
+        GameInstance = make_unique<MDGameInstance>();
+        GameInstance->Play();
+    }
 
     return 0;
 }
