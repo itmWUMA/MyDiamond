@@ -77,6 +77,8 @@ void MDGameInstance::Play()
     GameMode->GetHUD()->Render();
     while (!bQuitGame)
     {
+        GameMode->GetGameState()->IncreaseTurnCount();
+
         shared_ptr<IInputCommand> Command = GameMode->GetPlayerController()->InputComponent->HandleInput();
         if (Command)
         {

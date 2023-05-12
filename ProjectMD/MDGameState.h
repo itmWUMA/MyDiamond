@@ -10,7 +10,11 @@ class MDGameState
 public:
     MDGameState();
 
-public:
+    inline void IncreaseTurnCount() { ++TurnCount; }
+    inline int GetTurnCount() const { return TurnCount; }
+    inline unordered_set<MDDiamond*>& GetEliminatedDiamondSet() { return EliminatedDiamondSet; }
+
+private:
     unordered_set<MDDiamond*> EliminatedDiamondSet;
     int TurnCount = 0;
 };

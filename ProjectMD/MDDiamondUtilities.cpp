@@ -22,7 +22,7 @@ void MDDiamondUtilities::EliminateDiamonds(const shared_ptr<MDDiamond>& EntryDia
     }
 
     int Count = FindAllEliminatedDiamond(EntryDiamond, EliminateType, GameState);
-    EliminateDiamondsFromRecordSet(GameState->EliminatedDiamondSet);
+    EliminateDiamondsFromRecordSet(GameState->GetEliminatedDiamondSet());
 }
 
 int MDDiamondUtilities::FindAllEliminatedDiamond(const shared_ptr<MDDiamond>& EntryDiamond, EDiamondType EliminateType, const shared_ptr<MDGameState>& GameState)
@@ -37,13 +37,13 @@ int MDDiamondUtilities::FindAllEliminatedDiamond(const shared_ptr<MDDiamond>& En
         return 0;
     }
 
-    const int ResultCount = GameState->EliminatedDiamondSet.count(EntryDiamond.get());
+    const int ResultCount = GameState->GetEliminatedDiamondSet().count(EntryDiamond.get());
     if (ResultCount > 0)
     {
         return 0;
     }
 
-    GameState->EliminatedDiamondSet.insert(EntryDiamond.get());
+    GameState->GetEliminatedDiamondSet().insert(EntryDiamond.get());
 
     // All eliminated diamonds need to check their neighborhood and do the same thing
     return 1 + CheckNeighborhood(EntryDiamond, EliminateType, GameState, EMoveDirection::UP)

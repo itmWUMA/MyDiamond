@@ -9,6 +9,7 @@ class MDUserWidget
 {
 public:
     MDUserWidget() = default;
+    virtual ~MDUserWidget();
     void InitUserWidget(const weak_ptr<MDPlayerState>& PlayerStateCache, const weak_ptr<MDGameState>& GameStateCache);
     void Render() const;
     void RenderQuitUI() const;
