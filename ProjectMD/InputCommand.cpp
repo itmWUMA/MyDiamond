@@ -17,3 +17,8 @@ void MDQuitGameCommand::Execute(const shared_ptr<MDPlayerController>& PlayerCont
 {
     GameInstance->QuitGame();
 }
+
+void MDInteractCommand::Execute(const shared_ptr<MDPlayerController>& PlayerController)
+{
+    PlayerController->OnInteract();
+}

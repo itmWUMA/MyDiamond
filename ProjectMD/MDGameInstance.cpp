@@ -59,7 +59,7 @@ void MDGameInstance::InitScene()
     shared_ptr<MDDiamond> Diamond6 = make_shared<MDDiamond>('+', EDiamondType::TYPE_ONE);
     MDScene::Get()->RegisterActor(Diamond6);
     Diamond6->MoveToPosition(Vector2D(3, 1));
-    shared_ptr<MDDiamond> Diamond7 = make_shared<MDDiamond>('*', EDiamondType::TYPE_ONE);
+    shared_ptr<MDDiamond> Diamond7 = make_shared<MDDiamond>('*', EDiamondType::TYPE_FIVE);
     MDScene::Get()->RegisterActor(Diamond7);
     Diamond7->MoveToPosition(Vector2D(0, 4));
 #endif
@@ -79,7 +79,7 @@ void MDGameInstance::Play()
     {
         GameMode->GetGameState()->IncreaseTurnCount();
 
-        shared_ptr<IInputCommand> Command = GameMode->GetPlayerController()->InputComponent->HandleInput();
+        shared_ptr<IInputCommand> Command = GameMode->GetPlayerController()->GetInputComponent()->HandleInput();
         if (Command)
         {
             Command->Execute(GameMode->GetPlayerController());

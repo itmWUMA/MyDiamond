@@ -68,6 +68,11 @@ shared_ptr<MDActor> MDScene::GetActorByPosition(const Vector2D& Position) const
     return Slots[Position.first][Position.second];
 }
 
+shared_ptr<MDActor> MDScene::GetActorByPosition(int X, int Y) const
+{
+    return GetActorByPosition(Vector2D(X, Y));
+}
+
 bool MDScene::CheckActorPosition(const Vector2D& ActorPosition) const
 {
     const int PosX = ActorPosition.first;

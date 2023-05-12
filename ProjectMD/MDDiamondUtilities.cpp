@@ -21,8 +21,13 @@ void MDDiamondUtilities::EliminateDiamonds(const shared_ptr<MDDiamond>& EntryDia
         return;
     }
 
-    int Count = FindAllEliminatedDiamond(EntryDiamond, EliminateType, GameState);
-    EliminateDiamondsFromRecordSet(GameState->GetEliminatedDiamondSet());
+    const int Count = FindAllEliminatedDiamond(EntryDiamond, EliminateType, GameState);
+    if (Count > 1)
+    {
+        EliminateDiamondsFromRecordSet(GameState->GetEliminatedDiamondSet());
+    }
+
+    GameState->GetEliminatedDiamondSet().clear();
 }
 
 int MDDiamondUtilities::FindAllEliminatedDiamond(const shared_ptr<MDDiamond>& EntryDiamond, EDiamondType EliminateType, const shared_ptr<MDGameState>& GameState)
@@ -76,5 +81,4 @@ void MDDiamondUtilities::EliminateDiamondsFromRecordSet(unordered_set<MDDiamond*
             Scene->UnRegisterActor(Actor);
         }
     }
-    RecordSet.clear();
 }

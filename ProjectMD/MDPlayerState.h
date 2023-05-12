@@ -2,6 +2,8 @@
 
 #include "MDDefines.h"
 
+class MDDiamond;
+
 class MDPlayerState
 {
 public:
@@ -12,6 +14,7 @@ public:
 public:
     int PlayerStepCount = 0;
     int Score = 0;
+    shared_ptr<MDDiamond> AcquiredDiamond = nullptr;
 
 private:
     Vector2D DefaultSpawnPosition;

@@ -24,6 +24,7 @@ public:
     inline int GetRow() const { return SizeX; }
     inline int GetCol() const { return SizeY; }
     shared_ptr<MDActor> GetActorByPosition(const Vector2D& ActorPosition) const;
+    shared_ptr<MDActor> GetActorByPosition(int X, int Y) const;
     bool CheckActorPosition(const Vector2D& ActorPosition) const;
     bool CheckActorPosition(const shared_ptr<MDActor>& Actor) const;
     void RegisterActor(const shared_ptr<MDActor>& Actor);

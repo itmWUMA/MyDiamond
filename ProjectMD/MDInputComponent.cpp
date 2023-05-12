@@ -31,6 +31,10 @@ shared_ptr<IInputCommand> MDInputComponent::HandleInput() const
         case Keycode_D:
         case Keycode_d:
             return make_shared<MDMoveCommand>(EMoveDirection::RIGHT);
+            // Interact
+        case Keycode_E:
+        case Keycode_e:
+            return make_shared<MDInteractCommand>();
             // Esc
         case Keycode_Esc:
             return make_shared<MDQuitGameCommand>();

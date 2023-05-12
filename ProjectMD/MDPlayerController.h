@@ -18,9 +18,11 @@ public:
     void Possess(const shared_ptr<MDPawn>& PossessedPawn);
     void UnPossess();
     void OnPawnMove(EMoveDirection Direction) const;
-    shared_ptr<MDInputComponent> InputComponent;
+    void OnInteract() const;
+    shared_ptr<MDInputComponent> GetInputComponent() const;
 
 private:
+    shared_ptr<MDInputComponent> InputComponent;
     shared_ptr<MDPlayerState> PlayerState;
     shared_ptr<MDPawn> PossessedPawn;
 };

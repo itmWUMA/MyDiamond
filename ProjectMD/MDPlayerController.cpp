@@ -39,3 +39,18 @@ void MDPlayerController::OnPawnMove(EMoveDirection Direction) const
     PossessedPawn->Move(Direction);
     ++PlayerState->PlayerStepCount;
 }
+
+void MDPlayerController::OnInteract() const
+{
+    if (!PossessedPawn)
+    {
+        return;
+    }
+
+    PlayerState->AcquiredDiamond ? PossessedPawn->Throw() : PossessedPawn->Grab();
+}
+
+shared_ptr<MDInputComponent> MDPlayerController::GetInputComponent() const
+{
+    return InputComponent;
+}
