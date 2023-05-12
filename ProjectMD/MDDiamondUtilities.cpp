@@ -5,6 +5,7 @@
 #include "MDGameMode.h"
 #include "MDScene.h"
 #include "MDActor.h"
+#include "MDPlayerState.h"
 #include "MDSceneComponent.h"
 
 void MDDiamondUtilities::EliminateDiamonds(const shared_ptr<MDDiamond>& EntryDiamond, EDiamondType EliminateType)
@@ -21,10 +22,18 @@ void MDDiamondUtilities::EliminateDiamonds(const shared_ptr<MDDiamond>& EntryDia
         return;
     }
 
+    const float EntryDiamondScore = EntryDiamond->Score;
     const int Count = FindAllEliminatedDiamond(EntryDiamond, EliminateType, GameState);
     if (Count > 1)
     {
         EliminateDiamondsFromRecordSet(GameState->GetEliminatedDiamondSet());
+
+        // update player's score
+        const shared_ptr<MDPlayerState> PlayerState = GameMode->GetPlayerState();
+        if (PlayerState)
+        {
+            PlayerState->Score += static_cast<float>(Count) * EntryDiamondScore;
+        }
     }
 
     GameState->GetEliminatedDiamondSet().clear();

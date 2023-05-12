@@ -13,7 +13,7 @@ public:
 
 public:
     int PlayerStepCount = 0;
-    int Score = 0;
+    float Score = 0;
     shared_ptr<MDDiamond> AcquiredDiamond = nullptr;
 
 private:
