@@ -11,6 +11,7 @@ public:
     virtual ~MDGameInstance();
     void Play();
     void QuitGame();
+    void IncreaseTurn() const;
 
 private:
     void CreateGameMode();

@@ -77,8 +77,6 @@ void MDGameInstance::Play()
     GameMode->GetHUD()->Render();
     while (!bQuitGame)
     {
-        GameMode->GetGameState()->IncreaseTurnCount();
-
         shared_ptr<IInputCommand> Command = GameMode->GetPlayerController()->GetInputComponent()->HandleInput();
         if (Command)
         {
@@ -93,4 +91,13 @@ void MDGameInstance::Play()
 void MDGameInstance::QuitGame()
 {
     bQuitGame = true;
+}
+
+void MDGameInstance::IncreaseTurn() const
+{
+    const shared_ptr<MDGameState> GameState = GameMode->GetGameState();
+    if (GameState)
+    {
+        GameState->IncreaseTurnCount();
+    }
 }

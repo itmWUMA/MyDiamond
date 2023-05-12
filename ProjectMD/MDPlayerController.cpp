@@ -48,6 +48,8 @@ void MDPlayerController::OnInteract() const
     }
 
     PlayerState->AcquiredDiamond ? PossessedPawn->Throw() : PossessedPawn->Grab();
+
+    GameInstance->IncreaseTurn();
 }
 
 shared_ptr<MDInputComponent> MDPlayerController::GetInputComponent() const
