@@ -69,6 +69,9 @@
     <ClInclude Include="MDUserWidget.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="lib\json11\json11.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MDGameMode.cpp">
@@ -125,10 +128,18 @@
     <ClCompile Include="MDUserWidget.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="lib\json11\json11.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="debug\log.txt">
       <Filter>资源文件</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Config\Config.json">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>

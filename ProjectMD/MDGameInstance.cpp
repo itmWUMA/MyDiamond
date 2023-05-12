@@ -1,5 +1,5 @@
 #include "MDGameInstance.h"
-
+#include <fstream>
 #include "InputCommand.h"
 #include "MDDebugger.h"
 #include "MDDefines.h"
@@ -16,8 +16,11 @@ unique_ptr<MDGameInstance> GameInstance;
 
 MDGameInstance::MDGameInstance()
 {
-    CreateGameMode();
-    InitScene();
+    if (LoadConfig())
+    {
+        CreateGameMode();
+        InitScene();
+    }
 }
 
 MDGameInstance::~MDGameInstance()
@@ -29,7 +32,9 @@ MDGameInstance::~MDGameInstance()
 
 void MDGameInstance::CreateGameMode()
 {
-    shared_ptr<MDPawn> DefaultPawn = make_shared<MDPawn>('@');
+    json11::Json PawnConfig = ConfigJson["PawnTemplate"]["Texture"];
+    shared_ptr<MDPawn> DefaultPawn = PawnConfig.is_string() ?
+        make_shared<MDPawn>(PawnConfig.string_value().at(0)) : make_shared<MDPawn>();
     shared_ptr<MDPlayerController> PlayerController = make_shared<MDPlayerController>();
     shared_ptr<MDPlayerState> PlayerState = make_shared<MDPlayerState>(Vector2D(9, 2));
     shared_ptr<MDGameState> GameState = make_shared<MDGameState>();
@@ -69,6 +74,29 @@ void MDGameInstance::OnEndGame() const
 {
     GameMode->GetHUD()->RenderQuitUI();
     MDScene::DeleteScene();
+}
+
+bool MDGameInstance::LoadConfig()
+{
+    ifstream InputFileStream(CONFIG_PATH, ios::in);
+    if (!InputFileStream.is_open())
+    {
+        return false;
+    }
+
+    string JsonStr;
+    char Buffer[1024] = { 0 };
+    while (InputFileStream >> Buffer)
+    {
+        JsonStr.append(Buffer);
+    }
+
+    InputFileStream.close();
+
+    string ErrorCode;
+    ConfigJson = json11::Json::parse(JsonStr, ErrorCode);
+
+    return ErrorCode.empty();
 }
 
 void MDGameInstance::Play()

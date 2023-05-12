@@ -8,10 +8,15 @@
 #include "MDScene.h"
 #include "MDSceneComponent.h"
 
-MDPawn::MDPawn(char Texture) : Texture(Texture), PlayerState(nullptr)
+MDPawn::MDPawn() : PlayerState(nullptr)
 {
     RenderComponent = make_shared<MDRenderComponent>();
     MovementComponent = make_shared<MDMovementComponent>();
+}
+
+MDPawn::MDPawn(char Texture) : MDPawn()
+{
+    this->Texture = Texture;
 }
 
 MDPawn::~MDPawn()

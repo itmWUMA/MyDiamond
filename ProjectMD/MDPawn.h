@@ -12,6 +12,7 @@ class MDMovementComponent;
 class MDPawn : public MDActor, public enable_shared_from_this<MDPawn>
 {
 public:
+    MDPawn();
     MDPawn(char Texture);
     virtual ~MDPawn() override;
     MDPawn(char Texture, const shared_ptr<MDPlayerState>& PlayerState);
@@ -27,7 +28,7 @@ private:
     bool GetUpperActorPosition(Vector2D& OutPosition) const;
 
 private:
-    char Texture;
+    char Texture = '!';
     shared_ptr<MDPlayerState> PlayerState;
     shared_ptr<MDRenderComponent> RenderComponent;
     shared_ptr<MDMovementComponent> MovementComponent;

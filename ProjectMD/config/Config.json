@@ -1,0 +1,25 @@
+{
+    "DiamondTemplates": [
+        {
+            "Texture": "+",
+            "Type": 1
+        },
+        {
+            "Texture": "-",
+            "Type": 2
+        },
+        {
+            "Texture": "*",
+            "Type": 3
+        },
+        {
+            "Texture": "#",
+            "Type": 4
+        },
+        {
+            "Texture": "$",
+            "Type": 5
+        }
+    ],
+    "PawnTemplate": {"Texture": "@"}
+}

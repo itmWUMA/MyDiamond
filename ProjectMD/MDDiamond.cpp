@@ -8,6 +8,12 @@
 #include "MDScene.h"
 #include "MDSceneComponent.h"
 
+MDDiamond::MDDiamond()
+{
+    RenderComponent = make_shared<MDRenderComponent>();
+    MovementComponent = make_shared<MDMovementComponent>();
+}
+
 MDDiamond::~MDDiamond()
 {
 #if _DEBUG

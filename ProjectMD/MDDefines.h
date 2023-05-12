@@ -8,9 +8,9 @@ enum class EDiamondType
 {
     TYPE_ONE = 0x1,
     TYPE_TWO = 0x2,
-    TYPE_THREE = 0x4,
-    TYPE_FOUR = 0x8,
-    TYPE_FIVE = 0x10,
+    TYPE_THREE = 0x3,
+    TYPE_FOUR = 0x4,
+    TYPE_FIVE = 0x5,
 };
 
 enum class EMoveDirection
@@ -42,3 +42,4 @@ constexpr int Keycode_DirectionKey_FirstInputCode = 224;
 
 #define DEBUG_LOG_PATH "./debug/log.txt"
 #define DEBUG_FUNC_SIGN ((string(__FUNCTION__) + string("\n")).c_str())
+#define CONFIG_PATH "./config/config.json"

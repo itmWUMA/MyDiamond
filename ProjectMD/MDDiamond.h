@@ -18,6 +18,7 @@ class MDDiamond : public MDActor
     friend MDDiamondUtilities;
 
 public:
+    MDDiamond();
     virtual ~MDDiamond() override;
     MDDiamond(char Texture, EDiamondType DiamondType);
     virtual void Render() const override;
@@ -26,9 +27,9 @@ public:
     void MoveToPosition(Vector2D TargetPosition);
 
 public:
-    char Texture;
+    char Texture = '?';
     float Score = 1.f;
-    const EDiamondType DiamondType;
+    const EDiamondType DiamondType = EDiamondType::TYPE_ONE;
 
 private:
     shared_ptr<MDRenderComponent> RenderComponent;
