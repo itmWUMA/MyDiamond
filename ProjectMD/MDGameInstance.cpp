@@ -82,7 +82,7 @@ void MDGameInstance::Play()
         {
             Command->Execute(GameMode->GetPlayerController());
         }
-
+            
         bQuitGame ? OnEndGame() : GameMode->GetHUD()->Render();
     }
 #endif

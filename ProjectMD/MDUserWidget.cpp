@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "MDDebugger.h"
+#include "MDDiamond.h"
 #include "MDGameState.h"
 #include "MDPlayerState.h"
 #include "MDScene.h"
@@ -44,7 +45,12 @@ void MDUserWidget::RenderGameInfo() const
     if (!PlayerStateCache.expired() && !GameStateCache.expired())
     {
         cout << "Turn " << GameStateCache.lock()->GetTurnCount() << '\t';
-        cout << "Score = " << PlayerStateCache.lock()->Score;
+        cout << "Score = " << PlayerStateCache.lock()->Score << '\t';
+        const shared_ptr<MDPlayerState> PlayerState = PlayerStateCache.lock();
+        if (PlayerState->AcquiredDiamond)
+        {
+            PlayerState->AcquiredDiamond->Render();
+        }
     }
 }
 
