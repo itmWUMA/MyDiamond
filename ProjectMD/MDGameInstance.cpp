@@ -1,5 +1,8 @@
 #include "MDGameInstance.h"
+
+#include <conio.h>
 #include <fstream>
+#include <iostream>
 #include <thread>
 #include "InputCommand.h"
 #include "MDDebugger.h"
@@ -98,6 +101,11 @@ bool MDGameInstance::LoadConfig()
 void MDGameInstance::Delay(int Millisecond)
 {
     this_thread::sleep_for(chrono::milliseconds(Millisecond));
+    // clear input buffer
+    while (_kbhit())
+    {
+        _getch();
+    }
 }
 
 void MDGameInstance::OnEnterNextTurn() const
