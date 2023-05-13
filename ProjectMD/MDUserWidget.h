@@ -13,6 +13,7 @@ public:
     void InitUserWidget(const weak_ptr<MDPlayerState>& PlayerStateCache, const weak_ptr<MDGameState>& GameStateCache);
     void Render() const;
     void RenderQuitUI() const;
+    void RenderGameOverUI() const;
 
 private:
     void RenderHeader() const;

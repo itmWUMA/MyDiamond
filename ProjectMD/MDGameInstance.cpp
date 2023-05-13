@@ -25,7 +25,6 @@ MDGameInstance::MDGameInstance()
     if (LoadConfig())
     {
         CreateGameMode();
-        InitScene();
     }
 }
 
@@ -50,11 +49,6 @@ void MDGameInstance::CreateGameMode()
 
     GameMode = make_shared<MDGameMode>(DefaultPawn, PlayerController, PlayerState, GameState, HUD);
     MDScene::Get()->ChangeGameMode(GameMode);
-}
-
-void MDGameInstance::InitScene()
-{
-    OnEnterNextTurn();
 }
 
 void MDGameInstance::OnEndGame() const
@@ -104,8 +98,16 @@ void MDGameInstance::OnEnterNextTurn() const
     }
 }
 
+void MDGameInstance::OnGameOver()
+{
+    GameMode->GetHUD()->RenderGameOverUI();
+    QuitGame();
+}
+
 void MDGameInstance::Play()
 {
+    OnEnterNextTurn();
+
     do
     {
         GameMode->GetHUD()->Render();
@@ -114,6 +116,11 @@ void MDGameInstance::Play()
         if (Command)
         {
             Command->Execute(GameMode->GetPlayerController());
+        }
+
+        if (GameMode->GetGameState() && GameMode->GetGameState()->IsGameOver())
+        {
+            OnGameOver();
         }
 
         if (bQuitGame)
@@ -131,6 +138,11 @@ void MDGameInstance::QuitGame()
 void MDGameInstance::IncreaseTurn() const
 {
     const shared_ptr<MDGameState> GameState = GameMode->GetGameState();
+    if (GameState && GameState->IsGameOver())
+    {
+        return;
+    }
+
     if (GameState)
     {
         GameState->IncreaseTurnCount();

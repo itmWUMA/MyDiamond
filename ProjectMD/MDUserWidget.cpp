@@ -66,3 +66,10 @@ void MDUserWidget::RenderQuitUI() const
     cout << "GOODBYE~~~";
     RenderNewLine();
 }
+
+void MDUserWidget::RenderGameOverUI() const
+{
+    system("cls");
+    cout << "You DIE~~~";
+    RenderNewLine();
+}

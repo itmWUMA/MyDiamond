@@ -13,14 +13,15 @@ public:
     void Play();
     void QuitGame();
     void IncreaseTurn() const;
+    inline shared_ptr<MDGameMode> GetGameMode() const { return GameMode; }
 
 protected:
     virtual void OnEndGame() const;
     virtual void OnEnterNextTurn() const;
+    virtual void OnGameOver();
 
 private:
     void CreateGameMode();
-    void InitScene();
     bool LoadConfig();
     static void Delay(int Millisecond);
 

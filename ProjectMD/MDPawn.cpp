@@ -2,6 +2,7 @@
 #include "MDDefines.h"
 #include "MDDebugger.h"
 #include "MDDiamond.h"
+#include "MDGameState.h"
 #include "MDMovementComponent.h"
 #include "MDPlayerState.h"
 #include "MDRenderComponent.h"
@@ -87,11 +88,20 @@ void MDPawn::Throw() const
     const Vector2D TargetPosition = bResult ?
         Vector2D(OutPosition.first + 1, OutPosition.second) : Vector2D(0, SceneComponent->GetY());
 
-    // TODO: check target position beyond the deadline
-
     MDScene* Scene = MDScene::Get();
     const shared_ptr<MDDiamond> AcquiredDiamond = PlayerState->AcquiredDiamond;
     AcquiredDiamond->SceneComponent->SetVector(TargetPosition);
+
+    if (AcquiredDiamond->IsMeetingDeadLine())
+    {
+        const shared_ptr<MDGameState> GameState = GameInstance->GetGameMode()->GetGameState();
+        if (GameState)
+        {
+            GameState->SetGameOver();
+        }
+        return;
+    }
+
     Scene->RegisterActor(AcquiredDiamond);
     PlayerState->AcquiredDiamond = nullptr;
 

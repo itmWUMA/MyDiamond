@@ -3,6 +3,7 @@
 #include "MDDebugger.h"
 #include "MDDefines.h"
 #include "MDGameMode.h"
+#include "MDGameState.h"
 #include "MDMovementComponent.h"
 #include "MDRenderComponent.h"
 #include "MDScene.h"
@@ -79,4 +80,15 @@ void MDDiamond::MoveToPosition(Vector2D TargetPosition)
 
     SceneComponent->SetVector(TargetPosition);
     Scene->UpdateSlots();
+}
+
+bool MDDiamond::IsMeetingDeadLine() const
+{
+    const shared_ptr<MDGameState> GameState = GameInstance->GetGameMode()->GetGameState();
+    if (GameState)
+    {
+        return SceneComponent->GetX() >= GameState->GetDeadLine();
+    }
+
+    return false;
 }

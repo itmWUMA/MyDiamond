@@ -45,6 +45,11 @@ void MDDiamondUtilities::EliminateDiamonds(const shared_ptr<MDDiamond>& EntryDia
 bool MDDiamondUtilities::GenerateRowOfRandomDiamonds(const json11::Json& DiamondTemplates)
 {
     MDScene* Scene = MDScene::Get();
+    const shared_ptr<MDGameState> GameState = GameInstance->GetGameMode()->GetGameState();
+    if (!GameState)
+    {
+        return false;
+    }
 
     // all diamonds move down to the row below
     const unordered_set<shared_ptr<MDActor>> ActorSet = Scene->GetActorSet();
@@ -55,7 +60,11 @@ bool MDDiamondUtilities::GenerateRowOfRandomDiamonds(const json11::Json& Diamond
         {
             Diamond->Move(EMoveDirection::DOWN, 1);
 
-            // TODO: check deadline
+            if (Diamond->IsMeetingDeadLine())
+            {
+                GameState->SetGameOver();
+                return false;
+            }
         }
     }
 

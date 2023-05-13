@@ -25,6 +25,7 @@ public:
     void Move(EMoveDirection Direction);
     void Move(EMoveDirection Direction, int Step);
     void MoveToPosition(Vector2D TargetPosition);
+    bool IsMeetingDeadLine() const;
 
 public:
     char Texture = '?';
