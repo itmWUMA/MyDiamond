@@ -8,15 +8,15 @@
 #include "MDScene.h"
 #include "MDSceneComponent.h"
 
-MDPawn::MDPawn() : PlayerState(nullptr)
+MDPawn::MDPawn(const json11::Json& ConfigJson) : PlayerState(nullptr)
 {
     RenderComponent = make_shared<MDRenderComponent>();
     MovementComponent = make_shared<MDMovementComponent>();
-}
 
-MDPawn::MDPawn(char Texture) : MDPawn()
-{
-    this->Texture = Texture;
+    if (CheckConfig(ConfigJson))
+    {
+        Texture = ConfigJson["Texture"].string_value().at(0);
+    }
 }
 
 MDPawn::~MDPawn()
@@ -24,12 +24,6 @@ MDPawn::~MDPawn()
 #if _DEBUG
     MDDebugger::Log(DEBUG_FUNC_SIGN);
 #endif
-}
-
-MDPawn::MDPawn(char Texture, const shared_ptr<MDPlayerState>& PlayerState)
-    : MDPawn(Texture)
-{
-    InitPawn(PlayerState);
 }
 
 void MDPawn::InitPawn(const shared_ptr<MDPlayerState>& PlayerStateIns)
@@ -129,4 +123,9 @@ bool MDPawn::GetUpperActorPosition(Vector2D& OutPosition) const
     }
 
     return false;
+}
+
+bool MDPawn::CheckConfig(const json11::Json& ConfigJson)
+{
+    return ConfigJson["Texture"].is_string();
 }

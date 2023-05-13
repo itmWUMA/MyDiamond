@@ -38,25 +38,13 @@ MDGameInstance::~MDGameInstance()
 
 void MDGameInstance::CreateGameMode()
 {
-    const json11::Json PawnConfig = ConfigJson["PawnTemplate"];
-    shared_ptr<MDPawn> DefaultPawn = PawnConfig["Texture"].is_string() ?
-        make_shared<MDPawn>(PawnConfig["Texture"].string_value().at(0)) : make_shared<MDPawn>();
+    shared_ptr<MDPawn> DefaultPawn = make_shared<MDPawn>(ConfigJson["PawnTemplate"]);
 
     shared_ptr<MDPlayerController> PlayerController = make_shared<MDPlayerController>();
 
-    shared_ptr<MDPlayerState> PlayerState;
-    if (PawnConfig["DefaultPosition"].is_array())
-    {
-        int X = PawnConfig["DefaultPosition"].array_items()[0].int_value();
-        int Y = PawnConfig["DefaultPosition"].array_items()[1].int_value();
-        PlayerState = make_shared<MDPlayerState>(Vector2D(X, Y));
-    }
-    else
-    {
-        PlayerState = make_shared<MDPlayerState>();
-    }
+    shared_ptr<MDPlayerState> PlayerState = make_shared<MDPlayerState>(ConfigJson["PawnTemplate"]);
 
-    shared_ptr<MDGameState> GameState = make_shared<MDGameState>();
+    shared_ptr<MDGameState> GameState = make_shared<MDGameState>(ConfigJson["DeadLine"]);
 
     shared_ptr<MDUserWidget> HUD = make_shared<MDUserWidget>();
 

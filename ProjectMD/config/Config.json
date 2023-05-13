@@ -1,4 +1,5 @@
 {
+    "SceneSize": [10, 5],
     "DiamondTemplates": [
         {
             "Texture": "+",
@@ -23,6 +24,7 @@
     ],
     "PawnTemplate": {
         "Texture": "@",
-        "DefaultPosition": [9, 2]
-    }
+        "DefaultPosition": [ 9, 2 ]
+    },
+    "DeadLine": 8
 }
