@@ -16,9 +16,12 @@ public:
     inline shared_ptr<MDGameMode> GetGameMode() const { return GameMode; }
 
 protected:
-    virtual void OnEndGame() const;
+    virtual void OnEndPlay();
     virtual void OnEnterNextTurn() const;
     virtual void OnGameOver();
+    virtual void OnGameStart();
+    virtual void OnBeginPlay();
+    virtual void OnUpdata();
 
 private:
     void CreateGameMode();
@@ -27,6 +30,7 @@ private:
 
 private:
     shared_ptr<MDGameMode> GameMode;
+    shared_ptr<MDUserWidget> CurrentUI = nullptr;
     bool bQuitGame = false;
     json11::Json ConfigJson;
 };

@@ -14,33 +14,23 @@ MDUserWidget::~MDUserWidget()
     MDDebugger::Log(DEBUG_FUNC_SIGN);
 #endif
 }
-
-void MDUserWidget::InitUserWidget(const weak_ptr<MDPlayerState>& PlayerStateCache,
-                                  const weak_ptr<MDGameState>& GameStateCache)
-{
-    this->GameStateCache = GameStateCache;
-    this->PlayerStateCache = PlayerStateCache;
-}
-
 void MDUserWidget::Render() const
 {
     system("cls");
-    // First Line
-    RenderHeader();
-    RenderNewLine();
-    // Second Line
-    RenderGameInfo();
-    RenderNewLine();
-    // Scene
-    MDScene::Get()->RenderSence();
 }
 
-void MDUserWidget::RenderHeader() const
+void MDUserWidget::RenderNewLine()
+{
+    cout << '\n';
+    cout << '\n';
+}
+
+void MDMainUI::RenderHeader() const
 {
     cout << HeaderInfo;
 }
 
-void MDUserWidget::RenderGameInfo() const
+void MDMainUI::RenderGameInfo() const
 {
     if (!PlayerStateCache.expired() && !GameStateCache.expired())
     {
@@ -54,22 +44,42 @@ void MDUserWidget::RenderGameInfo() const
     }
 }
 
-void MDUserWidget::RenderNewLine()
+void MDGameEntryUI::Render() const
 {
-    cout << '\n';
-    cout << '\n';
+    MDUserWidget::Render();
 }
 
-void MDUserWidget::RenderQuitUI() const
+MDMainUI::MDMainUI(const weak_ptr<MDPlayerState>& PlayerStateCache, const weak_ptr<MDGameState>& GameStateCache)
+    : PlayerStateCache(PlayerStateCache), GameStateCache(GameStateCache)
 {
-    system("cls");
-    cout << "GOODBYE~~~";
+}
+
+void MDMainUI::Render() const
+{
+    MDUserWidget::Render();
+
+    // First Line
+    RenderHeader();
+    RenderNewLine();
+    // Second Line
+    RenderGameInfo();
+    RenderNewLine();
+    // Scene
+    MDScene::Get()->RenderSence();
+}
+
+void MDGameOverUI::Render() const
+{
+    MDUserWidget::Render();
+
+    cout << "You DIE~~~";
     RenderNewLine();
 }
 
-void MDUserWidget::RenderGameOverUI() const
+void MDPlayEndUI::Render() const
 {
-    system("cls");
-    cout << "You DIE~~~";
+    MDUserWidget::Render();
+
+    cout << "GOODBYE~~~";
     RenderNewLine();
 }

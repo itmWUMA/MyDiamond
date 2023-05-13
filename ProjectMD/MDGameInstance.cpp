@@ -45,15 +45,14 @@ void MDGameInstance::CreateGameMode()
 
     shared_ptr<MDGameState> GameState = make_shared<MDGameState>(ConfigJson["DeadLine"]);
 
-    shared_ptr<MDUserWidget> HUD = make_shared<MDUserWidget>();
-
-    GameMode = make_shared<MDGameMode>(DefaultPawn, PlayerController, PlayerState, GameState, HUD);
+    GameMode = make_shared<MDGameMode>(DefaultPawn, PlayerController, PlayerState, GameState);
     MDScene::Get()->ChangeGameMode(GameMode);
 }
 
-void MDGameInstance::OnEndGame() const
+void MDGameInstance::OnEndPlay()
 {
-    GameMode->GetHUD()->RenderQuitUI();
+    CurrentUI = make_shared<MDPlayEndUI>();
+    CurrentUI->Render();
     MDScene::DeleteScene();
 }
 
@@ -100,34 +99,56 @@ void MDGameInstance::OnEnterNextTurn() const
 
 void MDGameInstance::OnGameOver()
 {
-    GameMode->GetHUD()->RenderGameOverUI();
+    CurrentUI = make_shared<MDGameOverUI>();
+    CurrentUI->Render();
     QuitGame();
+}
+
+void MDGameInstance::OnGameStart()
+{
+    OnEnterNextTurn();
+    CurrentUI = make_shared<MDMainUI>(GameMode->GetPlayerState(), GameMode->GetGameState());
+}
+
+void MDGameInstance::OnBeginPlay()
+{
+    // TODO: game entry
+}
+
+void MDGameInstance::OnUpdata()
+{
+    if (CurrentUI)
+    {
+        CurrentUI->Render();
+    }
+
+    shared_ptr<IInputCommand> Command = GameMode->GetPlayerController()->GetInputComponent()->HandleInput();
+    if (Command)
+    {
+        Command->Execute(GameMode->GetPlayerController());
+    }
+
+    if (GameMode->GetGameState() && GameMode->GetGameState()->IsGameOver())
+    {
+        OnGameOver();
+    }
+
+    if (bQuitGame)
+    {
+        OnEndPlay();
+    }
 }
 
 void MDGameInstance::Play()
 {
-    OnEnterNextTurn();
+    OnBeginPlay();
 
-    do
+    OnGameStart();
+
+    while (!bQuitGame)
     {
-        GameMode->GetHUD()->Render();
-
-        shared_ptr<IInputCommand> Command = GameMode->GetPlayerController()->GetInputComponent()->HandleInput();
-        if (Command)
-        {
-            Command->Execute(GameMode->GetPlayerController());
-        }
-
-        if (GameMode->GetGameState() && GameMode->GetGameState()->IsGameOver())
-        {
-            OnGameOver();
-        }
-
-        if (bQuitGame)
-        {
-            OnEndGame();
-        }
-    } while (!bQuitGame);
+        OnUpdata();
+    }
 }
 
 void MDGameInstance::QuitGame()
@@ -148,7 +169,11 @@ void MDGameInstance::IncreaseTurn() const
         GameState->IncreaseTurnCount();
     }
 
-    GameMode->GetHUD()->Render();
+    if (CurrentUI)
+    {
+        CurrentUI->Render();
+    }
+    
     Delay(500);
 
     OnEnterNextTurn();
