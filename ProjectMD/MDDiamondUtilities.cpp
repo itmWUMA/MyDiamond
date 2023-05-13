@@ -1,4 +1,5 @@
 #include "MDDiamondUtilities.h"
+#include <queue>
 #include "MDDefines.h"
 #include "MDDiamond.h"
 #include "MDGameState.h"
@@ -26,7 +27,7 @@ void MDDiamondUtilities::EliminateDiamonds(const shared_ptr<MDDiamond>& EntryDia
     const int Count = FindAllEliminatedDiamond(EntryDiamond, EliminateType, GameState);
     if (Count > 1)
     {
-        EliminateDiamondsFromRecordSet(GameState->GetEliminatedDiamondSet());
+        vector<Vector2D> EliminatePositions = EliminateDiamondsFromRecordSet(GameState->GetEliminatedDiamondSet());
 
         // update player's score
         const shared_ptr<MDPlayerState> PlayerState = GameMode->GetPlayerState();
@@ -37,6 +38,8 @@ void MDDiamondUtilities::EliminateDiamonds(const shared_ptr<MDDiamond>& EntryDia
     }
 
     GameState->GetEliminatedDiamondSet().clear();
+
+    FixSuspendingDiamonds();
 }
 
 int MDDiamondUtilities::FindAllEliminatedDiamond(const shared_ptr<MDDiamond>& EntryDiamond, EDiamondType EliminateType, const shared_ptr<MDGameState>& GameState)
@@ -79,15 +82,75 @@ int MDDiamondUtilities::CheckNeighborhood(const shared_ptr<MDDiamond>& EntryDiam
     return 0;
 }
 
-void MDDiamondUtilities::EliminateDiamondsFromRecordSet(unordered_set<MDDiamond*>& RecordSet)
+vector<Vector2D> MDDiamondUtilities::EliminateDiamondsFromRecordSet(unordered_set<MDDiamond*>& RecordSet)
 {
     MDScene* Scene = MDScene::Get();
-    for (MDDiamond* Diamond : RecordSet)
+    vector<Vector2D> EliminatePositions;
+    for (const MDDiamond* Diamond : RecordSet)
     {
         if (Scene->CheckRegister(Diamond))
         {
             shared_ptr<MDActor> Actor = Scene->GetActorByPosition(Diamond->SceneComponent->GetVector());
+            EliminatePositions.push_back(Actor->SceneComponent->GetVector());
             Scene->UnRegisterActor(Actor);
         }
     }
+    return EliminatePositions;
+}
+
+int MDDiamondUtilities::CheckDiamondSuspend(const shared_ptr<MDDiamond>& Diamond)
+{
+    const MDScene* Scene = MDScene::Get();
+    if (!Scene->CheckActorPosition(Diamond))
+    {
+        return 0;
+    }
+
+    const int DiamondX = Diamond->SceneComponent->GetX();
+    const int DiamondY = Diamond->SceneComponent->GetY();
+    int CurX = DiamondX - 1;
+    for (; CurX >= 0; --CurX)
+    {
+        if (Scene->GetActorByPosition(Vector2D(CurX, DiamondY)))
+        {
+            break;
+        }
+    }
+
+    return DiamondX - CurX - 1;
+}
+
+void MDDiamondUtilities::FixSuspendingDiamonds()
+{
+    MDScene* Scene = MDScene::Get();
+    const unordered_set<shared_ptr<MDActor>>& ActorSet = Scene->GetActorSet();
+    priority_queue<shared_ptr<MDDiamond>, vector<shared_ptr<MDDiamond>>, MDDiamondCompairHandler_SmallX> DiamondHeap;
+
+    // sort diamonds, the upper diamond in the scene need to be checked preferentially
+    for (const shared_ptr<MDActor>& Actor : ActorSet)
+    {
+        shared_ptr<MDDiamond> Diamond = dynamic_pointer_cast<MDDiamond>(Actor);
+        if (Diamond)
+        {
+            DiamondHeap.push(Diamond);
+        }
+    }
+
+    while (!DiamondHeap.empty())
+    {
+        shared_ptr<MDDiamond> Diamond = DiamondHeap.top();
+        const int MoveDistance = CheckDiamondSuspend(Diamond);
+        if (MoveDistance > 0)
+        {
+            Diamond->Move(EMoveDirection::UP, MoveDistance);
+        }
+        DiamondHeap.pop();
+    }
+
+    Scene->UpdateSlots();
+}
+
+bool MDDiamondCompairHandler_SmallX::operator()(const shared_ptr<MDDiamond>& A, const shared_ptr<MDDiamond>& B) const
+{
+    return A->SceneComponent->GetX() > B->SceneComponent->GetX();
 }
