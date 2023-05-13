@@ -21,5 +21,8 @@
             "Type": 5
         }
     ],
-    "PawnTemplate": {"Texture": "@"}
+    "PawnTemplate": {
+        "Texture": "@",
+        "DefaultPosition": [9, 2]
+    }
 }
