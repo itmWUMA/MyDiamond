@@ -106,7 +106,7 @@ void MDPawn::Throw() const
     PlayerState->AcquiredDiamond = nullptr;
 
     // elimination
-    MDDiamondUtilities::EliminateDiamonds(AcquiredDiamond, AcquiredDiamond->DiamondType);
+    MDDiamondUtilities::EliminateDiamonds(AcquiredDiamond, AcquiredDiamond->GetType());
 }
 
 void MDPawn::Render() const

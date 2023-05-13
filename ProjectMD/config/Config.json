@@ -3,23 +3,28 @@
     "DiamondTemplates": [
         {
             "Texture": "+",
-            "Type": 1
+            "Type": 1,
+            "Score": 1
         },
         {
             "Texture": "-",
-            "Type": 2
+            "Type": 2,
+            "Score": 2
         },
         {
             "Texture": "*",
-            "Type": 3
+            "Type": 3,
+            "Score": 4
         },
         {
             "Texture": "#",
-            "Type": 4
+            "Type": 4,
+            "Score": 8
         },
         {
             "Texture": "$",
-            "Type": 5
+            "Type": 5,
+            "Score": 10
         }
     ],
     "PawnTemplate": {

@@ -73,17 +73,7 @@ bool MDDiamondUtilities::GenerateRowOfRandomDiamonds(const json11::Json& Diamond
     for (int i = 0; i < Col; ++i)
     {
         const json11::Json& DiamondTemplate = DiamondTemplates[rand() % DiamondTemplatesCount];
-        shared_ptr<MDDiamond> Diamond;
-        if (DiamondTemplate["Texture"].is_string() && DiamondTemplate["Type"].is_number())
-        {
-            Diamond = make_shared<MDDiamond>(
-                DiamondTemplate["Texture"].string_value().at(0),
-                static_cast<EDiamondType>(DiamondTemplate["Type"].number_value()));
-        }
-        else
-        {
-            Diamond = make_shared<MDDiamond>();
-        }
+        shared_ptr<MDDiamond> Diamond = make_shared<MDDiamond>(DiamondTemplate);
         Diamond->SceneComponent->SetVector(Vector2D(0, i));
         Scene->RegisterActor(Diamond);
     }

@@ -9,10 +9,17 @@
 #include "MDScene.h"
 #include "MDSceneComponent.h"
 
-MDDiamond::MDDiamond()
+MDDiamond::MDDiamond(const json11::Json& ConfigJson)
 {
     RenderComponent = make_shared<MDRenderComponent>();
     MovementComponent = make_shared<MDMovementComponent>();
+
+    if (CheckConfig(ConfigJson))
+    {
+        Texture = ConfigJson["Texture"].string_value().at(0);
+        DiamondType = static_cast<EDiamondType>(ConfigJson["Type"].int_value());
+        Score = static_cast<float>(ConfigJson["Score"].number_value());
+    }
 }
 
 MDDiamond::~MDDiamond()
@@ -91,4 +98,11 @@ bool MDDiamond::IsMeetingDeadLine() const
     }
 
     return false;
+}
+
+bool MDDiamond::CheckConfig(const json11::Json& ConfigJson)
+{
+    return ConfigJson["Texture"].is_string() &&
+        ConfigJson["Type"].is_number() &&
+        ConfigJson["Score"].is_number();
 }
