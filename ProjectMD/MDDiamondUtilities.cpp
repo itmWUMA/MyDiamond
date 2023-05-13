@@ -42,6 +42,46 @@ void MDDiamondUtilities::EliminateDiamonds(const shared_ptr<MDDiamond>& EntryDia
     FixSuspendingDiamonds();
 }
 
+bool MDDiamondUtilities::GenerateRowOfRandomDiamonds(const json11::Json& DiamondTemplates)
+{
+    MDScene* Scene = MDScene::Get();
+
+    // all diamonds move down to the row below
+    const unordered_set<shared_ptr<MDActor>> ActorSet = Scene->GetActorSet();
+    for (const shared_ptr<MDActor>& Actor : ActorSet)
+    {
+        shared_ptr<MDDiamond> Diamond = dynamic_pointer_cast<MDDiamond>(Actor);
+        if (Diamond)
+        {
+            Diamond->Move(EMoveDirection::DOWN, 1);
+
+            // TODO: check deadline
+        }
+    }
+
+    const int Col = Scene->GetCol();
+    const size_t DiamondTemplatesCount = DiamondTemplates.array_items().size();
+    for (int i = 0; i < Col; ++i)
+    {
+        const json11::Json& DiamondTemplate = DiamondTemplates[rand() % DiamondTemplatesCount];
+        shared_ptr<MDDiamond> Diamond;
+        if (DiamondTemplate["Texture"].is_string() && DiamondTemplate["Type"].is_number())
+        {
+            Diamond = make_shared<MDDiamond>(
+                DiamondTemplate["Texture"].string_value().at(0),
+                static_cast<EDiamondType>(DiamondTemplate["Type"].number_value()));
+        }
+        else
+        {
+            Diamond = make_shared<MDDiamond>();
+        }
+        Diamond->SceneComponent->SetVector(Vector2D(0, i));
+        Scene->RegisterActor(Diamond);
+    }
+
+    return true;
+}
+
 int MDDiamondUtilities::FindAllEliminatedDiamond(const shared_ptr<MDDiamond>& EntryDiamond, EDiamondType EliminateType, const shared_ptr<MDGameState>& GameState)
 {
     if (!GameState)

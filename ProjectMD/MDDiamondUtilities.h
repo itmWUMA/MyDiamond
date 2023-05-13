@@ -2,7 +2,7 @@
 
 #include <memory>
 #include <unordered_set>
-
+#include "json11/json11.hpp"
 #include "MDDefines.h"
 using namespace std;
 
@@ -16,6 +16,9 @@ class MDDiamondUtilities
 {
 public:
     static void EliminateDiamonds(const shared_ptr<MDDiamond>& EntryDiamond, EDiamondType EliminateType);
+
+    /* Generate new row of random diamonds based on templates. Return value means whether generate successfully or not */
+    static bool GenerateRowOfRandomDiamonds(const json11::Json& DiamondTemplates);
 
 private:
     static int FindAllEliminatedDiamond(const shared_ptr<MDDiamond>& EntryDiamond, EDiamondType EliminateType, const shared_ptr<MDGameState>& GameState);

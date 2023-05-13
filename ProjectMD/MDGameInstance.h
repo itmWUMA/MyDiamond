@@ -14,11 +14,15 @@ public:
     void QuitGame();
     void IncreaseTurn() const;
 
+protected:
+    virtual void OnEndGame() const;
+    virtual void OnEnterNextTurn() const;
+
 private:
     void CreateGameMode();
     void InitScene();
-    void OnEndGame() const;
     bool LoadConfig();
+    static void Delay(int Millisecond);
 
 private:
     shared_ptr<MDGameMode> GameMode;

@@ -1,5 +1,6 @@
 #include "MDGameInstance.h"
 #include <fstream>
+#include <thread>
 #include "InputCommand.h"
 #include "MDDebugger.h"
 #include "MDDefines.h"
@@ -16,6 +17,8 @@ unique_ptr<MDGameInstance> GameInstance;
 
 MDGameInstance::MDGameInstance()
 {
+    srand(static_cast<unsigned int>(time(nullptr)));
+
     if (LoadConfig())
     {
         CreateGameMode();
@@ -60,29 +63,7 @@ void MDGameInstance::CreateGameMode()
 
 void MDGameInstance::InitScene()
 {
-#if _DEBUG
-    shared_ptr<MDDiamond> Diamond1 = make_shared<MDDiamond>('+', EDiamondType::TYPE_ONE);
-    MDScene::Get()->RegisterActor(Diamond1);
-    Diamond1->MoveToPosition(Vector2D(0, 1));
-    shared_ptr<MDDiamond> Diamond2 = make_shared<MDDiamond>('+', EDiamondType::TYPE_ONE);
-    MDScene::Get()->RegisterActor(Diamond2);
-    Diamond2->MoveToPosition(Vector2D(1, 0));
-    shared_ptr<MDDiamond> Diamond3 = make_shared<MDDiamond>('*', EDiamondType::TYPE_FIVE);
-    MDScene::Get()->RegisterActor(Diamond3);
-    Diamond3->MoveToPosition(Vector2D(1, 1));
-    shared_ptr<MDDiamond> Diamond4 = make_shared<MDDiamond>('+', EDiamondType::TYPE_ONE);
-    MDScene::Get()->RegisterActor(Diamond4);
-    Diamond4->MoveToPosition(Vector2D(1, 2));
-    shared_ptr<MDDiamond> Diamond5 = make_shared<MDDiamond>('+', EDiamondType::TYPE_ONE);
-    MDScene::Get()->RegisterActor(Diamond5);
-    Diamond5->MoveToPosition(Vector2D(2, 1));
-    shared_ptr<MDDiamond> Diamond6 = make_shared<MDDiamond>('+', EDiamondType::TYPE_ONE);
-    MDScene::Get()->RegisterActor(Diamond6);
-    Diamond6->MoveToPosition(Vector2D(3, 1));
-    shared_ptr<MDDiamond> Diamond7 = make_shared<MDDiamond>('*', EDiamondType::TYPE_FIVE);
-    MDScene::Get()->RegisterActor(Diamond7);
-    Diamond7->MoveToPosition(Vector2D(0, 4));
-#endif
+    OnEnterNextTurn();
 }
 
 void MDGameInstance::OnEndGame() const
@@ -114,21 +95,36 @@ bool MDGameInstance::LoadConfig()
     return ErrorCode.empty();
 }
 
+void MDGameInstance::Delay(int Millisecond)
+{
+    this_thread::sleep_for(chrono::milliseconds(Millisecond));
+}
+
+void MDGameInstance::OnEnterNextTurn() const
+{
+    if (ConfigJson["DiamondTemplates"].is_array())
+    {
+        MDDiamondUtilities::GenerateRowOfRandomDiamonds(ConfigJson["DiamondTemplates"]);
+    }
+}
+
 void MDGameInstance::Play()
 {
-#if _DEBUG
-    GameMode->GetHUD()->Render();
-    while (!bQuitGame)
+    do
     {
+        GameMode->GetHUD()->Render();
+
         shared_ptr<IInputCommand> Command = GameMode->GetPlayerController()->GetInputComponent()->HandleInput();
         if (Command)
         {
             Command->Execute(GameMode->GetPlayerController());
         }
-            
-        bQuitGame ? OnEndGame() : GameMode->GetHUD()->Render();
-    }
-#endif
+
+        if (bQuitGame)
+        {
+            OnEndGame();
+        }
+    } while (!bQuitGame);
 }
 
 void MDGameInstance::QuitGame()
@@ -143,4 +139,9 @@ void MDGameInstance::IncreaseTurn() const
     {
         GameState->IncreaseTurnCount();
     }
+
+    GameMode->GetHUD()->Render();
+    Delay(500);
+
+    OnEnterNextTurn();
 }
