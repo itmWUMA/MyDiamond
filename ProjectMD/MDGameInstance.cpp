@@ -145,7 +145,7 @@ void MDGameInstance::Play()
 
     OnGameStart();
 
-    while (!bQuitGame)
+    while (!bQuitGame && !bRestartGame)
     {
         OnUpdata();
     }
@@ -154,6 +154,11 @@ void MDGameInstance::Play()
 void MDGameInstance::QuitGame()
 {
     bQuitGame = true;
+}
+
+void MDGameInstance::RestartGame()
+{
+    bRestartGame = true;
 }
 
 void MDGameInstance::IncreaseTurn() const

@@ -1,5 +1,6 @@
 #include "MDUserWidget.h"
 
+#include <conio.h>
 #include <iostream>
 
 #include "MDDebugger.h"
@@ -74,6 +75,31 @@ void MDGameOverUI::Render() const
 
     cout << "You DIE~~~";
     RenderNewLine();
+
+    cout << "Restart? [Y/N]";
+    HandleUIInput();
+}
+
+void MDGameOverUI::HandleUIInput() const
+{
+    MDUserWidget::HandleUIInput();
+
+    const int Input = _getch();
+    switch (Input)
+    {
+        // restart game
+    case Keycode_Y:
+    case Keycode_y:
+        GameInstance->RestartGame();
+        break;
+        // quit game
+    case Keycode_N:
+    case Keycode_n:
+        GameInstance->QuitGame();
+        break;
+    default:
+        break;
+    }
 }
 
 void MDPlayEndUI::Render() const

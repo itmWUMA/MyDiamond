@@ -13,6 +13,7 @@ public:
 
 protected:
     static void RenderNewLine();
+    virtual void HandleUIInput() const {}
 };
 
 class MDGameEntryUI : public MDUserWidget
@@ -41,6 +42,9 @@ class MDGameOverUI : public MDUserWidget
 {
 public:
     virtual void Render() const override;
+
+protected:
+    virtual void HandleUIInput() const override;
 };
 
 class MDPlayEndUI : public MDUserWidget

@@ -37,7 +37,11 @@ constexpr int Keycode_Left = 75;
 constexpr int Keycode_Right = 77;
 constexpr int Keycode_Esc = 27;
 constexpr int Keycode_E = 69;
-constexpr int  Keycode_e = 101;
+constexpr int Keycode_e = 101;
+constexpr int Keycode_Y = 89;
+constexpr int Keycode_y = 121;
+constexpr int Keycode_N = 78;
+constexpr int Keycode_n = 110;
 constexpr int Keycode_DirectionKey_FirstInputCode = 224;
 
 #define DEBUG_LOG_PATH "./debug/log.txt"
