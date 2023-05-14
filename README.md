@@ -18,7 +18,7 @@ Use Visual Studio to build the project
 
 ## Project Structure
 
-![UML](public/Images/Project_ MD.jpg)
+![UML](https://github.com/itmWUMA/MyDiamond/blob/main/Images/Project_%20MD.jpg)
 
 ### MDGameInstance
 
