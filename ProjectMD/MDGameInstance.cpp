@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iostream>
 #include <thread>
+#include "cereal/archives/binary.hpp"
 #include "InputCommand.h"
 #include "MDDebugger.h"
 #include "MDDefines.h"
@@ -24,6 +25,7 @@ MDGameInstance::MDGameInstance()
 
     if (LoadConfig())
     {
+        LoadSaving();
         CreateGameMode();
     }
 }
@@ -43,7 +45,7 @@ void MDGameInstance::CreateGameMode()
 
     shared_ptr<MDPlayerState> PlayerState = make_shared<MDPlayerState>(ConfigJson["PawnTemplate"]);
 
-    shared_ptr<MDGameState> GameState = make_shared<MDGameState>(ConfigJson["DeadLine"]);
+    shared_ptr<MDGameState> GameState = make_shared<MDGameState>(ConfigJson["DeadLine"], SaveGameData.BestScore);
 
     GameMode = make_shared<MDGameMode>(DefaultPawn, PlayerController, PlayerState, GameState);
     MDScene::Get()->ChangeGameMode(GameMode);
@@ -51,6 +53,7 @@ void MDGameInstance::CreateGameMode()
 
 void MDGameInstance::OnEndPlay()
 {
+    SaveGame();
     CurrentUI = make_shared<MDPlayEndUI>();
     CurrentUI->Render();
     MDScene::DeleteScene();
@@ -87,6 +90,32 @@ void MDGameInstance::Delay(int Millisecond)
     {
         _getch();
     }
+}
+
+void MDGameInstance::LoadSaving()
+{
+    ifstream InputFileStream(SAVE_DATA_PATH, ios::binary);
+    if (!InputFileStream.is_open())
+    {
+        return;
+    }
+
+    cereal::BinaryInputArchive Archive(InputFileStream);
+    Archive(SaveGameData);
+
+    InputFileStream.close();
+}
+
+void MDGameInstance::SaveGame()
+{
+    OnSaveGame();
+
+    ofstream OutputFileStream(SAVE_DATA_PATH, ios::binary);
+
+    cereal::BinaryOutputArchive Archive(OutputFileStream);
+    Archive(SaveGameData);
+
+    OutputFileStream.close();
 }
 
 void MDGameInstance::OnEnterNextTurn() const
@@ -136,6 +165,15 @@ void MDGameInstance::OnUpdata()
     if (bQuitGame)
     {
         OnEndPlay();
+    }
+}
+
+void MDGameInstance::OnSaveGame()
+{
+    const shared_ptr<MDGameState> GameState = GameMode->GetGameState();
+    if (GameState)
+    {
+        SaveGameData.BestScore = GameState->GetBestScore();
     }
 }
 

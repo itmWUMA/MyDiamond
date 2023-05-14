@@ -153,6 +153,7 @@
     <ClInclude Include="MDPlayerController.h" />
     <ClInclude Include="MDPlayerState.h" />
     <ClInclude Include="MDRenderComponent.h" />
+    <ClInclude Include="MDSaveGame.hpp" />
     <ClInclude Include="MDScene.h" />
     <ClInclude Include="MDSceneComponent.h" />
     <ClInclude Include="MDUserWidget.h" />

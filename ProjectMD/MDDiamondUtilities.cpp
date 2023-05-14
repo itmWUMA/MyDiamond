@@ -35,6 +35,7 @@ void MDDiamondUtilities::EliminateDiamonds(const shared_ptr<MDDiamond>& EntryDia
         {
             PlayerState->Score += static_cast<float>(Count) * EntryDiamondScore;
         }
+        GameState->SyncBestScore(PlayerState->Score);
     }
 
     GameState->GetEliminatedDiamondSet().clear();

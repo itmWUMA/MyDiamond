@@ -36,7 +36,9 @@ void MDMainUI::RenderGameInfo() const
     if (!PlayerStateCache.expired() && !GameStateCache.expired())
     {
         cout << "Turn " << GameStateCache.lock()->GetTurnCount() << '\t';
-        cout << "Score = " << PlayerStateCache.lock()->Score << '\t';
+        cout << "Current Score = " << PlayerStateCache.lock()->Score << '\t';
+        const shared_ptr<MDGameState> GameState = GameStateCache.lock();
+        cout << "Best Score = " << GameState->GetBestScore() << '\t';
         const shared_ptr<MDPlayerState> PlayerState = PlayerStateCache.lock();
         if (PlayerState->AcquiredDiamond)
         {

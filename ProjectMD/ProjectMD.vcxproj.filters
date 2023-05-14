@@ -72,6 +72,9 @@
     <ClInclude Include="lib\json11\json11.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="MDSaveGame.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MDGameMode.cpp">

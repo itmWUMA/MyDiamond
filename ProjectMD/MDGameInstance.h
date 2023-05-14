@@ -3,6 +3,7 @@
 #include <memory>
 #include "json11/json11.hpp"
 #include "MDGameMode.h"
+#include "MDSaveGame.hpp"
 using namespace std;
 
 class MDGameInstance
@@ -24,11 +25,14 @@ protected:
     virtual void OnGameStart();
     virtual void OnBeginPlay();
     virtual void OnUpdata();
+    virtual void OnSaveGame();
 
 private:
     void CreateGameMode();
     bool LoadConfig();
     static void Delay(int Millisecond);
+    void LoadSaving();
+    void SaveGame();
 
 private:
     shared_ptr<MDGameMode> GameMode;
@@ -36,6 +40,7 @@ private:
     bool bQuitGame = false;
     bool bRestartGame = false;
     json11::Json ConfigJson;
+    MDSaveGame SaveGameData;
 };
 
 extern unique_ptr<MDGameInstance> GameInstance;

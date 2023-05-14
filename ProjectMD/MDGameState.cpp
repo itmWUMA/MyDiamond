@@ -1,11 +1,20 @@
 #include "MDGameState.h"
 #include "MDDiamond.h"
 
-MDGameState::MDGameState(const json11::Json& ConfigJson)
+MDGameState::MDGameState(const json11::Json& ConfigJson, float BestScore)
+    : BestScore(BestScore)
 {
     if (CheckConfig(ConfigJson))
     {
         DeadLine = ConfigJson.int_value();
+    }
+}
+
+void MDGameState::SyncBestScore(float CurrentScore)
+{
+    if (CurrentScore > BestScore)
+    {
+        BestScore = CurrentScore;
     }
 }
 

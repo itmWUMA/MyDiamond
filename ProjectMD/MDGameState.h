@@ -9,7 +9,7 @@ class MDDiamond;
 class MDGameState
 {
 public:
-    MDGameState(const json11::Json& ConfigJson);
+    MDGameState(const json11::Json& ConfigJson, float BestScore);
 
     inline void IncreaseTurnCount() { ++TurnCount; }
     inline int GetTurnCount() const { return TurnCount; }
@@ -17,6 +17,8 @@ public:
     inline int GetDeadLine() const { return DeadLine; }
     inline bool IsGameOver() const { return bGameOver; }
     inline void SetGameOver() { bGameOver = true; }
+    inline float GetBestScore() const { return BestScore; }
+    void SyncBestScore(float CurrentScore);
 
 private:
     static bool CheckConfig(const json11::Json& ConfigJson);
@@ -26,5 +28,6 @@ private:
     int TurnCount = 0;
     int DeadLine = 8;
     bool bGameOver = false;
+    float BestScore = 0;
 };
 
