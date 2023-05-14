@@ -3,7 +3,10 @@ A simple demo of 2D PUZ game. However, constructing by a self-designed gameplay 
 
 ## Game Features
 
-
+- Move character in the map
+- Grab and throw diamonds to eliminate same diamonds
+- Diamonds will be generated each turn
+- DO NOT LET DIAMONDS MEET DEADLINE!!!
 
 ## Build Project
 
@@ -14,6 +17,8 @@ Use Visual Studio to build the project
 - **Get release version**
 
 ## Project Structure
+
+![UML](./Images/Project_ MD.jpg)
 
 ### MDGameInstance
 
@@ -33,6 +38,26 @@ public:
 
 private:
     void CreateGameMode();
+   	
+	// ...
+};
+```
+
+Game iteration
+
+```cpp
+class MDGameInstance
+{
+    // ...
+    
+protected:
+    virtual void OnEndPlay();
+    virtual void OnEnterNextTurn() const;
+    virtual void OnGameOver();
+    virtual void OnGameStart();
+    virtual void OnBeginPlay();
+    virtual void OnUpdata();
+    virtual void OnSaveGame();
    	
 	// ...
 };
@@ -206,6 +231,39 @@ class IInputCommand
 public:
     virtual ~IInputCommand() = default;
     virtual void Execute(const shared_ptr<MDPlayerController>& PlayerController) = 0;
+};
+```
+
+### MDUserWidget
+
+Create UI for the process of game.
+
+```cpp
+class MDUserWidget
+{
+public:
+    // ...
+    
+    virtual void Render() const;
+	
+    // ...
+};
+```
+
+### MDSaveGame
+
+Contain data to serialize and deserialize.
+
+```cpp
+struct MDSaveGame
+{
+    float BestScore;
+
+    template<class Archive>
+    void serialize(Archive& archive)
+    {
+        archive(BestScore);
+    }
 };
 ```
 
