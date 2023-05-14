@@ -18,7 +18,7 @@ Use Visual Studio to build the project
 
 ## Project Structure
 
-![UML](./Images/Project_ MD.jpg)
+![UML](public/Images/Project_ MD.jpg)
 
 ### MDGameInstance
 
