@@ -141,7 +141,8 @@ void MDGameInstance::OnGameStart()
 
 void MDGameInstance::OnBeginPlay()
 {
-    // TODO: game entry
+    CurrentUI = make_shared<MDGameEntryUI>();
+    CurrentUI->Render();
 }
 
 void MDGameInstance::OnUpdata()
@@ -179,7 +180,10 @@ void MDGameInstance::OnSaveGame()
 
 void MDGameInstance::Play()
 {
-    OnBeginPlay();
+    while (!bStartGame)
+    {
+        OnBeginPlay();
+    }
 
     OnGameStart();
 
@@ -197,6 +201,11 @@ void MDGameInstance::QuitGame()
 void MDGameInstance::RestartGame()
 {
     bRestartGame = true;
+}
+
+void MDGameInstance::StartGame()
+{
+    bStartGame = true;
 }
 
 void MDGameInstance::IncreaseTurn() const

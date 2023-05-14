@@ -20,6 +20,16 @@ class MDGameEntryUI : public MDUserWidget
 {
 public:
     virtual void Render() const override;
+
+protected:
+    virtual void HandleUIInput() const override;
+
+private:
+    void RenderHeader() const;
+    static void RenderBestScore();
+
+private:
+    const char* HeaderInfo = "MY DIAMOND\titmWUMA";
 };
 
 class MDMainUI : public MDUserWidget

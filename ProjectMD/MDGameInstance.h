@@ -14,6 +14,7 @@ public:
     void Play();
     void QuitGame();
     void RestartGame();
+    void StartGame();
     void IncreaseTurn() const;
     inline shared_ptr<MDGameMode> GetGameMode() const { return GameMode; }
     inline bool IsRestartGame() const { return bRestartGame; }
@@ -39,6 +40,7 @@ private:
     shared_ptr<MDUserWidget> CurrentUI = nullptr;
     bool bQuitGame = false;
     bool bRestartGame = false;
+    bool bStartGame = false;
     json11::Json ConfigJson;
     MDSaveGame SaveGameData;
 };

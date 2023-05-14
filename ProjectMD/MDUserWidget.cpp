@@ -50,6 +50,40 @@ void MDMainUI::RenderGameInfo() const
 void MDGameEntryUI::Render() const
 {
     MDUserWidget::Render();
+
+    RenderHeader();
+    RenderNewLine();
+
+    RenderBestScore();
+    RenderNewLine();
+
+    cout << "Start Game? [Y]";
+    HandleUIInput();
+}
+
+void MDGameEntryUI::HandleUIInput() const
+{
+    MDUserWidget::HandleUIInput();
+
+    const int Input = _getch();
+    if (Input == Keycode_Y || Input == Keycode_y)
+    {
+        GameInstance->StartGame();
+    }
+}
+
+void MDGameEntryUI::RenderHeader() const
+{
+    cout << HeaderInfo;
+}
+
+void MDGameEntryUI::RenderBestScore()
+{
+    const shared_ptr<MDGameState> GameState = GameInstance->GetGameMode()->GetGameState();
+    if (GameState)
+    {
+        cout << "Best Score : " << GameState->GetBestScore();
+    }
 }
 
 MDMainUI::MDMainUI(const weak_ptr<MDPlayerState>& PlayerStateCache, const weak_ptr<MDGameState>& GameStateCache)
