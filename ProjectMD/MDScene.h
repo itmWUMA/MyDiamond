@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <memory>
+#include <mutex>
 #include <unordered_set>
 #include "MDDefines.h"
 using namespace std;
@@ -47,6 +48,7 @@ private:
 
 private:
     static MDScene* SceneInstance;
+    static mutex Mutex;
 
 private:
     int SizeX = 10;

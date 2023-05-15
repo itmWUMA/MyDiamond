@@ -8,6 +8,8 @@ using namespace std;
 
 MDScene* MDScene::SceneInstance = nullptr;
 
+mutex MDScene::Mutex;
+
 MDScene::MDScene()
 {
     Slots = Map(SizeX, vector<shared_ptr<MDActor>>(SizeY, nullptr));
@@ -45,7 +47,11 @@ MDScene* MDScene::Get()
 {
     if (!SceneInstance)
     {
-        SceneInstance = new MDScene;
+        lock_guard<mutex> Lock(Mutex);
+        if (!SceneInstance)
+        {
+            SceneInstance = new MDScene;
+        }
     }
 
     return SceneInstance;
